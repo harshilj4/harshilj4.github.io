@@ -1,0 +1,1472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Harshil Jadawala — Engineering Portfolio</title>
+  <meta name="description" content="Harshil Jadawala — Mechanical Engineering student at York University." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Unbounded:wght@300;400;700;900&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #0d0e0a;
+      --paper: #f2edd8;
+      --paper2: #e8e0c2;
+      --rust: #c1440e;
+      --rust2: #e0532a;
+      --graphite: #3a3b35;
+      --dim: #7a7868;
+      --grid: rgba(0,0,0,0.055);
+      --blue-pencil: #2a5fa5;
+      --green-pencil: #2d7a45;
+      --r: 4px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Space Mono', monospace;
+      background: var(--paper);
+      color: var(--ink);
+      overflow-x: hidden;
+    }
+
+    /* Graph paper background */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid) 1px, transparent 1px),
+        linear-gradient(rgba(0,0,0,0.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,0,0,0.018) 1px, transparent 1px);
+      background-size: 60px 60px, 60px 60px, 12px 12px, 12px 12px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    body > * { position: relative; z-index: 1; }
+
+    /* NAV */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 5vw;
+      height: 68px;
+      border-bottom: 2px solid var(--ink);
+      background: var(--paper);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      font-family: 'Unbounded', sans-serif;
+      font-weight: 900;
+      font-size: 1.1rem;
+      letter-spacing: -0.04em;
+      text-decoration: none;
+      color: var(--ink);
+    }
+
+    .logo em {
+      color: var(--rust);
+      font-style: normal;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--graphite);
+      border-bottom: 2px solid transparent;
+      padding-bottom: 2px;
+      transition: color 0.15s, border-color 0.15s;
+    }
+
+    .nav-links a:hover {
+      color: var(--rust);
+      border-color: var(--rust);
+    }
+
+    .nav-right {
+      font-size: 0.7rem;
+      color: var(--dim);
+      letter-spacing: 0.06em;
+    }
+
+    /* ─────── HERO ─────── */
+    .hero {
+      min-height: calc(100vh - 68px);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-bottom: 2px solid var(--ink);
+    }
+
+    .hero-left {
+      padding: 6vw 5vw;
+      border-right: 2px solid var(--ink);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .stamp {
+      display: inline-block;
+      border: 3px solid var(--rust);
+      color: var(--rust);
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.8rem;
+      font-weight: 700;
+      transform: rotate(-1.5deg);
+      width: fit-content;
+      margin-bottom: 2rem;
+    }
+
+    h1 {
+      font-family: 'Unbounded', sans-serif;
+      font-weight: 900;
+      font-size: clamp(3.5rem, 8vw, 7.5rem);
+      line-height: 0.88;
+      letter-spacing: -0.06em;
+      margin-bottom: 2rem;
+    }
+
+    h1 .outline {
+      -webkit-text-stroke: 2px var(--ink);
+      color: transparent;
+    }
+
+    .hero-bio {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: var(--graphite);
+      max-width: 460px;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-bio strong { color: var(--ink); }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .tag {
+      border: 1.5px solid var(--ink);
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.65rem;
+      color: var(--graphite);
+    }
+
+    .tag.rust { border-color: var(--rust); color: var(--rust); }
+    .tag.blue { border-color: var(--blue-pencil); color: var(--blue-pencil); }
+    .tag.green { border-color: var(--green-pencil); color: var(--green-pencil); }
+
+    /* Hero right — annotation panel */
+    .hero-right {
+      display: grid;
+      grid-template-rows: 1fr 1fr;
+    }
+
+    .hero-stat-block {
+      padding: 3vw 4vw;
+      border-bottom: 2px solid var(--ink);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .stat-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--dim);
+      margin-bottom: 0.4rem;
+    }
+
+    .stat-num {
+      font-family: 'Unbounded', sans-serif;
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -0.05em;
+      color: var(--ink);
+    }
+
+    .stat-note {
+      font-size: 0.78rem;
+      color: var(--dim);
+      margin-top: 0.4rem;
+      font-style: italic;
+    }
+
+    .hero-currently {
+      padding: 3vw 4vw;
+      background: var(--ink);
+      color: var(--paper);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .hero-currently .stat-label { color: rgba(242,237,216,0.5); }
+    .hero-currently .stat-note { color: rgba(242,237,216,0.65); }
+
+    .status-row {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .blink {
+      width: 9px; height: 9px;
+      border-radius: 50%;
+      background: #6ddb8a;
+      animation: blink 1.8s ease-in-out infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.2; }
+    }
+
+    .status-text {
+      font-family: 'Unbounded', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+    }
+
+    /* ─────── SECTION WRAPPER ─────── */
+    .section {
+      padding: 80px 5vw;
+      border-bottom: 2px solid var(--ink);
+      max-width: none;
+    }
+
+    .section-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--dim);
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .section-label::after {
+      content: "";
+      flex: 1;
+      max-width: 80px;
+      height: 1px;
+      background: var(--dim);
+    }
+
+    h2 {
+      font-family: 'Unbounded', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 3.4rem);
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -0.06em;
+      margin-bottom: 2.5rem;
+    }
+
+    /* ─────── PROJECTS SECTION ─────── */
+    #projects { padding-bottom: 0; }
+
+    /* ── Featured project: watering system ── */
+    .project-featured {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      border: 2px solid var(--ink);
+      margin-bottom: 2px;
+    }
+
+    .project-video-wrap {
+      background: #111;
+      border-right: 2px solid var(--ink);
+      aspect-ratio: 16/9;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-video-wrap video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .project-video-wrap iframe,
+    .slide iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+
+    .video-overlay-label {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: var(--rust);
+      color: white;
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 0.28rem 0.6rem;
+      font-weight: 700;
+    }
+
+    .video-play-hint {
+      position: absolute;
+      bottom: 12px;
+      right: 14px;
+      font-size: 0.64rem;
+      color: rgba(255,255,255,0.55);
+      letter-spacing: 0.08em;
+    }
+
+    .project-info {
+      padding: 2.2rem 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: var(--paper2);
+    }
+
+    .proj-num {
+      font-size: 0.65rem;
+      color: var(--dim);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .proj-title {
+      font-family: 'Unbounded', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -0.05em;
+      margin-bottom: 1rem;
+    }
+
+    .proj-desc {
+      font-size: 0.88rem;
+      line-height: 1.7;
+      color: var(--graphite);
+      margin-bottom: 1.4rem;
+    }
+
+    /* annotation-style bullet list */
+    .proj-notes {
+      list-style: none;
+      border-left: 3px solid var(--rust);
+      padding-left: 1rem;
+      margin-bottom: 1.4rem;
+    }
+
+    .proj-notes li {
+      font-size: 0.78rem;
+      color: var(--graphite);
+      line-height: 1.6;
+      margin-bottom: 0.3rem;
+    }
+
+    .proj-notes li::before {
+      content: "→ ";
+      color: var(--rust);
+      font-weight: 700;
+    }
+
+    .proj-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    /* ── project grid (other projects) ── */
+    .projects-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-top: 2px solid var(--ink);
+    }
+
+    .proj-card {
+      padding: 2rem 1.8rem;
+      border-right: 2px solid var(--ink);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 320px;
+      transition: background 0.2s;
+    }
+
+    .proj-card:last-child { border-right: none; }
+    .proj-card:hover { background: var(--paper2); }
+
+    .proj-card .proj-icon {
+      font-size: 2rem;
+      margin-bottom: 1.2rem;
+      display: block;
+    }
+
+    .proj-card .proj-num { margin-bottom: 0.4rem; }
+
+    .proj-card .proj-title {
+      font-size: 1.15rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .proj-card .proj-desc {
+      font-size: 0.82rem;
+      flex: 1;
+    }
+
+    /* ─────── ABOUT ─────── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 0.45fr 1fr;
+      gap: 4vw;
+      align-items: start;
+    }
+
+    .about-sidebar {
+      border: 2px solid var(--ink);
+      padding: 1.6rem;
+    }
+
+    .sidebar-item {
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--ink);
+    }
+
+    .sidebar-item:last-child { border-bottom: none; padding-bottom: 0; }
+
+    .sidebar-key {
+      font-size: 0.63rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--dim);
+      margin-bottom: 0.25rem;
+    }
+
+    .sidebar-val {
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: var(--ink);
+    }
+
+    .about-body p {
+      font-size: 1rem;
+      line-height: 1.75;
+      color: var(--graphite);
+      margin-bottom: 1.2rem;
+    }
+
+    .about-body p strong { color: var(--ink); }
+
+    .pull-quote {
+      font-family: 'DM Serif Display', serif;
+      font-style: italic;
+      font-size: clamp(1.4rem, 3vw, 2.1rem);
+      line-height: 1.35;
+      color: var(--ink);
+      border-left: 4px solid var(--rust);
+      padding-left: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    /* ─────── EXPERIENCE ─────── */
+    .exp-entry {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 2rem;
+      padding: 2.5rem 0;
+      border-bottom: 1.5px solid var(--grid);
+    }
+
+    .exp-entry:last-child { border-bottom: none; }
+
+    .exp-date {
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      color: var(--dim);
+      line-height: 1.5;
+      padding-top: 0.2rem;
+    }
+
+    .exp-date strong {
+      display: block;
+      font-size: 0.8rem;
+      color: var(--rust);
+      margin-bottom: 0.3rem;
+      letter-spacing: 0;
+    }
+
+    .exp-title {
+      font-family: 'Unbounded', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      margin-bottom: 0.3rem;
+    }
+
+    .exp-company {
+      font-size: 0.78rem;
+      color: var(--blue-pencil);
+      margin-bottom: 1rem;
+      letter-spacing: 0.06em;
+    }
+
+    .exp-bullets {
+      list-style: none;
+      padding: 0;
+    }
+
+    .exp-bullets li {
+      font-size: 0.88rem;
+      color: var(--graphite);
+      line-height: 1.65;
+      margin-bottom: 0.4rem;
+      padding-left: 1.2rem;
+      position: relative;
+    }
+
+    .exp-bullets li::before {
+      content: "—";
+      position: absolute;
+      left: 0;
+      color: var(--dim);
+    }
+
+    /* ─────── SKILLS ─────── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border: 2px solid var(--ink);
+    }
+
+    .skill-col {
+      padding: 2rem 1.6rem;
+      border-right: 2px solid var(--ink);
+    }
+
+    .skill-col:last-child { border-right: none; }
+
+    .skill-col h3 {
+      font-family: 'Unbounded', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.2rem;
+      padding-bottom: 0.8rem;
+      border-bottom: 1.5px solid var(--ink);
+    }
+
+    .skill-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      font-size: 0.82rem;
+      color: var(--graphite);
+      line-height: 1.5;
+      margin-bottom: 0.55rem;
+    }
+
+    .skill-item::before {
+      content: "·";
+      color: var(--rust);
+      font-weight: 900;
+      font-size: 1.1rem;
+      line-height: 1.3;
+      flex-shrink: 0;
+    }
+
+    /* ─────── EDUCATION ─────── */
+    .edu-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+    }
+
+    .edu-card {
+      border: 2px solid var(--ink);
+      padding: 2rem;
+    }
+
+    .edu-card:first-child { background: var(--ink); color: var(--paper); }
+
+    .edu-degree {
+      font-family: 'Unbounded', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      margin-bottom: 0.4rem;
+    }
+
+    .edu-school {
+      font-size: 0.78rem;
+      color: var(--rust2);
+      letter-spacing: 0.08em;
+      margin-bottom: 1.2rem;
+    }
+
+    .edu-card:first-child .edu-school { color: #e0a060; }
+
+    .edu-body {
+      font-size: 0.88rem;
+      line-height: 1.65;
+      color: var(--graphite);
+    }
+
+    .edu-card:first-child .edu-body { color: rgba(242,237,216,0.75); }
+
+    /* ─────── CONTACT ─────── */
+    #contact {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 400px;
+      border-bottom: none;
+    }
+
+    .contact-left {
+      padding: 5vw;
+      border-right: 2px solid var(--ink);
+      background: var(--ink);
+      color: var(--paper);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .contact-left h2 { color: var(--paper); }
+
+    .contact-left p {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: rgba(242,237,216,0.7);
+      max-width: 420px;
+      margin-bottom: 2rem;
+    }
+
+    .contact-right {
+      padding: 5vw;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0.6rem;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      text-decoration: none;
+      padding: 1.1rem 1.4rem;
+      border: 2px solid var(--ink);
+      color: var(--ink);
+      transition: background 0.15s, color 0.15s;
+      font-size: 0.88rem;
+    }
+
+    .contact-link:hover {
+      background: var(--ink);
+      color: var(--paper);
+    }
+
+    .contact-link .cl-icon {
+      font-size: 1.1rem;
+      width: 28px;
+    }
+
+    .contact-link .cl-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--dim);
+      margin-right: auto;
+    }
+
+    .contact-link:hover .cl-label { color: rgba(242,237,216,0.6); }
+
+    footer {
+      padding: 1.5rem 5vw;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 2px solid var(--ink);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      color: var(--dim);
+    }
+
+    /* ─────── SLIDESHOW ─────── */
+    .slideshow {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #111;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 0.55s ease;
+      pointer-events: none;
+    }
+
+    .slide.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .slide video,
+    .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .slide-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 0.5rem 0.8rem;
+      background: rgba(0,0,0,0.55);
+      font-size: 0.63rem;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.75);
+      text-transform: uppercase;
+    }
+
+    .slide-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 10;
+      background: rgba(0,0,0,0.45);
+      color: white;
+      border: none;
+      cursor: pointer;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      transition: background 0.15s;
+    }
+
+    .slide-nav:hover { background: var(--rust); }
+    .slide-nav.prev { left: 8px; }
+    .slide-nav.next { right: 8px; }
+
+    .slide-dots {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 6px;
+      z-index: 10;
+    }
+
+    .dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.4);
+      cursor: pointer;
+      border: none;
+      transition: background 0.2s;
+    }
+
+    .dot.active { background: white; }
+
+    /* ─────── WIP STATUS BAR ─────── */
+    .proj-wip-bar {
+      margin-bottom: 1rem;
+      border: 1.5px solid var(--ink);
+      padding: 0.9rem 1rem;
+      background: var(--paper);
+    }
+
+    .wip-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.63rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--dim);
+      margin-bottom: 0.75rem;
+    }
+
+    .wip-badge {
+      background: var(--green-pencil);
+      color: white;
+      padding: 0.18rem 0.55rem;
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      font-weight: 700;
+    }
+
+    .wip-steps {
+      display: flex;
+      gap: 0;
+    }
+
+    .wip-step {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+      position: relative;
+    }
+
+    .wip-step::before {
+      content: "";
+      position: absolute;
+      top: 7px;
+      left: 50%;
+      right: -50%;
+      height: 2px;
+      background: var(--paper2);
+      z-index: 0;
+    }
+
+    .wip-step:last-child::before { display: none; }
+
+    .wip-step.done::before { background: var(--green-pencil); }
+    .wip-step.active::before { background: var(--rust); }
+
+    .wip-dot {
+      width: 16px; height: 16px;
+      border-radius: 50%;
+      border: 2px solid var(--paper2);
+      background: var(--paper2);
+      position: relative;
+      z-index: 1;
+      transition: background 0.2s;
+    }
+
+    .wip-step.done .wip-dot {
+      background: var(--green-pencil);
+      border-color: var(--green-pencil);
+    }
+
+    .wip-step.active .wip-dot {
+      background: var(--rust);
+      border-color: var(--rust);
+      box-shadow: 0 0 0 3px rgba(193,68,14,0.2);
+    }
+
+    .wip-step-label {
+      font-size: 0.58rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--dim);
+      text-align: center;
+      line-height: 1.3;
+    }
+
+    .wip-step.done .wip-step-label { color: var(--green-pencil); font-weight: 700; }
+    .wip-step.active .wip-step-label { color: var(--rust); font-weight: 700; }
+
+    /* ─────── SCROLL REVEAL ─────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ─────── RESPONSIVE ─────── */
+    @media (max-width: 860px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-left { border-right: none; border-bottom: 2px solid var(--ink); }
+      .hero-right { grid-template-rows: auto auto; }
+
+      .project-featured { grid-template-columns: 1fr; }
+      .project-video-wrap { border-right: none; border-bottom: 2px solid var(--ink); aspect-ratio: 16/9; }
+
+      .projects-row { grid-template-columns: 1fr; }
+      .proj-card { border-right: none; border-bottom: 2px solid var(--ink); }
+
+      .about-grid { grid-template-columns: 1fr; }
+      .skills-grid { grid-template-columns: 1fr 1fr; }
+      .skill-col:nth-child(2), .skill-col:nth-child(4) { border-right: none; }
+      .skill-col:nth-child(3), .skill-col:nth-child(4) { border-top: 2px solid var(--ink); }
+      .edu-grid { grid-template-columns: 1fr; }
+      #contact { grid-template-columns: 1fr; }
+      .contact-left { border-right: none; border-bottom: 2px solid var(--ink); }
+      .nav-links { display: none; }
+    }
+
+    @media (max-width: 600px) {
+      .skills-grid { grid-template-columns: 1fr; }
+      .skill-col { border-right: none !important; border-bottom: 2px solid var(--ink); }
+      .exp-entry { grid-template-columns: 1fr; gap: 0.5rem; }
+      h1 { font-size: clamp(3rem, 16vw, 5rem); }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="logo" href="#home">HJ<em>.</em></a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Work</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-right">Toronto · ON · 2026</div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-left">
+      <div>
+        <div class="stamp">Mech Eng Co-op · York</div>
+        <h1>Harshil<br><span class="outline">Jadawala</span></h1>
+        <p class="hero-bio">
+          I build things that have to work in the real world —
+          <strong>sensors, circuits, structures, and software</strong> that solve actual problems.
+          Currently studying mechanical engineering and working as an undergraduate research assistant on laser-induced graphene sensors.
+        </p>
+      </div>
+      <div>
+        <div class="hero-tags">
+          <span class="tag rust">RC Aircraft Builder</span>
+          <span class="tag blue">Research Assistant</span>
+          <span class="tag green">Arduino + MATLAB</span>
+          <span class="tag">UNHack 2nd Place</span>
+          <span class="tag">Sensors & Circuits</span>
+          <span class="tag">Aviation Enthusiast</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="hero-stat-block">
+        <div class="stat-label">Years of hands-on building</div>
+        <div class="stat-num">5+</div>
+        <div class="stat-note">RC planes, Arduino rigs, hardware prototypes</div>
+      </div>
+      <div class="hero-currently">
+        <div class="stat-label">Current status</div>
+        <div class="status-row">
+          <div class="blink"></div>
+          <div class="status-text">Research Active</div>
+        </div>
+        <div class="stat-note">Laser-induced graphene sensor development · York University · May 2026</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="section" id="projects">
+    <div class="section-label">03 / Projects</div>
+    <h2 class="reveal">Builds I can talk through.</h2>
+
+    <!-- FEATURED: Watering System -->
+    <div class="project-featured reveal">
+      <div class="project-video-wrap">
+        <iframe
+          src="https://www.youtube.com/embed/Ik2zGVtEsoc?rel=0&modestbranding=1"
+          title="Automatic Plant Watering System demo"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+        <div class="video-overlay-label">▶ Live demo footage</div>
+      </div>
+      <div class="project-info">
+        <div>
+          <div class="proj-num">Project 01 · Sensors / Control / Automation</div>
+          <div class="proj-title">Automatic Plant Watering System</div>
+          <p class="proj-desc">
+            A fully functional sensor-to-actuator control loop using Arduino and MATLAB.
+            The system reads soil moisture in real time, applies threshold logic, and
+            switches a pump via MOSFET — no manual watering required.
+          </p>
+          <ul class="proj-notes">
+            <li>Soil moisture sensor calibration and threshold decision logic</li>
+            <li>MOSFET-based pump driver circuit for safe high-current switching</li>
+            <li>MATLAB serial interface for live plotting and system state feedback</li>
+            <li>Emergency stop logic and state-machine control flow</li>
+          </ul>
+        </div>
+        <div class="proj-tags">
+          <span class="tag rust">Arduino</span>
+          <span class="tag">MATLAB</span>
+          <span class="tag">MOSFET</span>
+          <span class="tag blue">Sensors</span>
+          <span class="tag green">Automation</span>
+          <span class="tag">State Machine</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- RC AIRPLANE: featured row with slideshow -->
+    <div class="project-featured reveal" style="margin-top:2px;">
+      <div class="project-video-wrap">
+        <div class="slideshow" id="planeSlideshow">
+
+          <!-- Slide 1: video -->
+          <div class="slide active" data-index="0">
+            <iframe
+              src="https://www.youtube.com/embed/L-_7fKUDGoE?rel=0&modestbranding=1"
+              title="RC Airplane flight footage"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+            <div class="slide-caption">▶ Flight footage</div>
+          </div>
+
+          <!-- Slide 2: top view open wiring -->
+          <div class="slide" data-index="1">
+            <img src="plane_top_open.jpg" alt="RC airplane top view — wiring and electronics exposed" loading="lazy" />
+            <div class="slide-caption">Top view — electronics & motor wiring</div>
+          </div>
+
+          <!-- Slide 3: close-up controller board -->
+          <div class="slide" data-index="2">
+            <img src="plane_wiring.jpg" alt="Close-up of flight controller PCB and wiring" loading="lazy" />
+            <div class="slide-caption">Flight controller PCB detail — GD005/GD006 board</div>
+          </div>
+
+          <!-- Slide 4: complete top view -->
+          <div class="slide" data-index="3">
+            <img src="plane_top_complete.jpg" alt="RC airplane complete — top view finished build" loading="lazy" />
+            <div class="slide-caption">Finished build — closed fuselage, dual props</div>
+          </div>
+
+          <button class="slide-nav prev" onclick="planeSlidePrev()" aria-label="Previous">‹</button>
+          <button class="slide-nav next" onclick="planeSlideNext()" aria-label="Next">›</button>
+
+          <div class="slide-dots" id="planeDots">
+            <button class="dot active" onclick="planeGoTo(0)"></button>
+            <button class="dot" onclick="planeGoTo(1)"></button>
+            <button class="dot" onclick="planeGoTo(2)"></button>
+            <button class="dot" onclick="planeGoTo(3)"></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-info">
+        <div>
+          <div class="proj-num">Project 02 · Airframe / Electronics / Aviation</div>
+          <div class="proj-title">RC Airplane — Scratch Build</div>
+          <p class="proj-desc">
+            Designed and assembled a flyable twin-motor RC aircraft from a foam glider airframe. Every decision — motor placement, prop pitch, CG, battery routing, and wiring — had immediate physical consequences on whether it flew straight or didn't fly at all.
+          </p>
+          <ul class="proj-notes">
+            <li>Foam airframe modified for twin brushed motors and dual ESC setup</li>
+            <li>GD005/GD006 flight controller board wiring and integration</li>
+            <li>Motor, propeller, battery and receiver placement for balance</li>
+            <li>Multiple test iterations — tuning throttle response and CG position</li>
+          </ul>
+        </div>
+        <div class="proj-tags">
+          <span class="tag rust">Aviation</span>
+          <span class="tag">Airframe</span>
+          <span class="tag blue">Electronics</span>
+          <span class="tag">ESC Wiring</span>
+          <span class="tag green">Flight Testing</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- FEATURED: Noise Tracker -->
+    <div class="project-featured reveal" style="margin-top:2px;">
+      <div class="project-video-wrap">
+        <iframe
+          src="https://www.youtube.com/embed/03TQ7miFJfc?rel=0&modestbranding=1"
+          title="Noise Tracker sensor test"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+        <div class="video-overlay-label">▶ Sensor test — room demo</div>
+      </div>
+      <div class="project-info">
+        <div>
+          <div class="proj-num">Project 03 · Sensors / IoT / UX Research — In Development</div>
+          <div class="proj-title">Noise Tracker — Smart Study Space Monitor</div>
+          <p class="proj-desc">
+            A sensor system that classifies ambient noise levels in real time and reports occupancy status for campus study spaces — libraries, quiet rooms, common areas. Born out of a real frustration: showing up to a packed library with no way to know before you leave.
+          </p>
+          <ul class="proj-notes">
+            <li>Sound sensor readings smoothed and classified into quiet / moderate / busy / full states</li>
+            <li>Pilot testing conducted in York University study spaces, libraries, and common areas</li>
+            <li>User surveys and observational research shaped the threshold and classification logic</li>
+            <li>Currently building app + backend infrastructure for live status updates — check any space remotely before heading there</li>
+            <li>Exploring Wi-Fi signal density as a supplementary passive occupancy signal (no microphone required)</li>
+          </ul>
+        </div>
+        <div>
+          <div class="proj-wip-bar">
+            <div class="wip-label">
+              <span>Development status</span>
+              <span class="wip-badge">Active build</span>
+            </div>
+            <div class="wip-track">
+              <div class="wip-steps">
+                <div class="wip-step done">
+                  <div class="wip-dot"></div>
+                  <div class="wip-step-label">Hardware prototype</div>
+                </div>
+                <div class="wip-step done">
+                  <div class="wip-dot"></div>
+                  <div class="wip-step-label">Pilot testing</div>
+                </div>
+                <div class="wip-step active">
+                  <div class="wip-dot"></div>
+                  <div class="wip-step-label">App + infra</div>
+                </div>
+                <div class="wip-step">
+                  <div class="wip-dot"></div>
+                  <div class="wip-step-label">Live deploy</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="proj-tags" style="margin-top:1rem;">
+            <span class="tag blue">Sensors</span>
+            <span class="tag">IoT</span>
+            <span class="tag green">In Development</span>
+            <span class="tag">UX Research</span>
+            <span class="tag rust">Pilot Tested</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- OTHER PROJECTS GRID -->
+    <div class="projects-row">
+
+      <div class="proj-card reveal" style="background:var(--paper2);">
+        <span class="proj-icon">🪸</span>
+        <div>
+          <div class="proj-num">Project 04 · UNHack · 2nd Place</div>
+          <div class="proj-title">Coral Vision</div>
+          <p class="proj-desc">
+            Hackathon prototype for AI-assisted early detection of coral reef disease via autonomous scanning. Pitched to judges and finished 2nd overall at UNHack.
+          </p>
+        </div>
+        <div class="proj-tags" style="margin-top:1rem;">
+          <span class="tag blue">AI</span>
+          <span class="tag">Sustainability</span>
+          <span class="tag">Pitching</span>
+        </div>
+      </div>
+
+      <div class="proj-card reveal">
+        <span class="proj-icon">🎯</span>
+        <div>
+          <div class="proj-num">Project 05 · Vision / Servo Control</div>
+          <div class="proj-title">Laser Tracking Turret</div>
+          <p class="proj-desc">
+            Webcam-based color target tracking feeding servo control for smooth low-latency turret movement. Focused on reducing jitter and latency in the control loop.
+          </p>
+        </div>
+        <div class="proj-tags" style="margin-top:1rem;">
+          <span class="tag">Computer Vision</span>
+          <span class="tag green">Servo</span>
+          <span class="tag">Hardware</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="section" id="about">
+    <div class="section-label">01 / About</div>
+    <div class="about-grid">
+      <aside class="about-sidebar reveal">
+        <div class="sidebar-item">
+          <div class="sidebar-key">School</div>
+          <div class="sidebar-val">Mech Eng Co-op · York University · 2025–</div>
+        </div>
+        <div class="sidebar-item">
+          <div class="sidebar-key">Location</div>
+          <div class="sidebar-val">Toronto / GTA, Ontario</div>
+        </div>
+        <div class="sidebar-item">
+          <div class="sidebar-key">Current role</div>
+          <div class="sidebar-val">Undergraduate Research Assistant — LIG Sensors</div>
+        </div>
+        <div class="sidebar-item">
+          <div class="sidebar-key">Interests</div>
+          <div class="sidebar-val">Aviation · Automotive · Manufacturing · Instrumentation · Hardware R&D</div>
+        </div>
+        <div class="sidebar-item">
+          <div class="sidebar-key">Stack</div>
+          <div class="sidebar-val">Arduino · MATLAB · Python · Java · SolidWorks · Fusion 360</div>
+        </div>
+      </aside>
+
+      <div class="about-body reveal">
+        <p>
+          I'm <strong>Harshil Jadawala</strong> — a mechanical engineering student who's most productive when there's something physical in front of me to wire, test, break, and fix.
+        </p>
+        <blockquote class="pull-quote">
+          "Can I build an RC airplane that actually flies? Can I automate a pump with a sensor and some code? Can I track a target in real time with a servo and a webcam?"
+        </blockquote>
+        <p>
+          These are the questions I chase. Not for a grade — because I want to know if it works. Right now I'm channelling that same mentality into <strong>laser-induced graphene sensor research</strong> at York, learning how real R&D moves from material prep to test data.
+        </p>
+        <p>
+          I'm especially drawn to engineering where physical constraints matter: aircraft, vehicles, thermal systems, structures, manufacturing, testing, and instrumentation. I'm looking for co-op roles where I can do real work on things that have to function reliably in the world.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section class="section" id="experience">
+    <div class="section-label">02 / Work</div>
+    <h2 class="reveal">Experience that shaped how I work.</h2>
+
+    <div class="exp-entry reveal">
+      <div class="exp-date">
+        <strong>May 2026 — Present</strong>
+        York University
+      </div>
+      <div>
+        <div class="exp-title">Undergraduate Research Assistant</div>
+        <div class="exp-company">Faculty Research Team — Laser-Induced Graphene Sensors</div>
+        <ul class="exp-bullets">
+          <li>Contributing to sensor development work targeting strain, temperature, and humidity measurement using LIG materials.</li>
+          <li>Working through the full research workflow: material preparation, sensor testing, measurement, documentation, and iteration.</li>
+          <li>Collaborating with graduate students and project leads on flexible electronics, sensing materials, lab tools, and experimental design.</li>
+          <li>Building foundational understanding of how materials science, electronics, and mechanical applications connect in applied research.</li>
+        </ul>
+        <div class="hero-tags" style="margin-top:1rem;">
+          <span class="tag blue">LIG Sensors</span>
+          <span class="tag">Research</span>
+          <span class="tag green">Instrumentation</span>
+          <span class="tag">Testing</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-entry reveal">
+      <div class="exp-date">
+        <strong>Summer 2023</strong>
+        Peel Region, ON
+      </div>
+      <div>
+        <div class="exp-title">IT Intern</div>
+        <div class="exp-company">PLASP Child Care Services</div>
+        <ul class="exp-bullets">
+          <li>Prepared, configured, and reprogrammed tablets deployed across Peel Region schools and childcare sites.</li>
+          <li>Diagnosed and resolved software and device issues; prepared equipment for large-scale rollout.</li>
+          <li>Supported device tracking, data handling, and deployment logistics in a structured technical environment.</li>
+          <li>Built practical troubleshooting habits: isolate the problem, test the fix, document what changed.</li>
+        </ul>
+        <div class="hero-tags" style="margin-top:1rem;">
+          <span class="tag">Troubleshooting</span>
+          <span class="tag">Device Config</span>
+          <span class="tag">IT Ops</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section class="section" id="skills" style="padding-bottom:0;">
+    <div class="section-label">04 / Skills</div>
+    <h2 class="reveal">Tools I'm building fluency with.</h2>
+    <div class="skills-grid reveal">
+      <div class="skill-col">
+        <h3>Design & CAD</h3>
+        <div class="skill-item">SolidWorks — parts, assemblies, drawings</div>
+        <div class="skill-item">Fusion 360 — integrated design & CAM</div>
+        <div class="skill-item">AutoCAD — 2D drafting</div>
+        <div class="skill-item">Design iteration, GD&T basics</div>
+      </div>
+      <div class="skill-col">
+        <h3>Hardware & Circuits</h3>
+        <div class="skill-item">Arduino — programming and wiring</div>
+        <div class="skill-item">Grove sensor ecosystem</div>
+        <div class="skill-item">MOSFET driver circuits, relay control</div>
+        <div class="skill-item">Soil moisture, DHT20, sound sensors</div>
+      </div>
+      <div class="skill-col">
+        <h3>Programming</h3>
+        <div class="skill-item">MATLAB — data, plotting, serial control</div>
+        <div class="skill-item">Java — coursework, logic, OOP</div>
+        <div class="skill-item">Python — scripting, analysis</div>
+        <div class="skill-item">Arduino C/C++ for embedded logic</div>
+      </div>
+      <div class="skill-col">
+        <h3>Engineering Habits</h3>
+        <div class="skill-item">Methodical testing and calibration</div>
+        <div class="skill-item">Rapid prototyping and iteration</div>
+        <div class="skill-item">Documentation and change tracking</div>
+        <div class="skill-item">Problem decomposition, first principles</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section class="section" id="education">
+    <div class="section-label">05 / Education</div>
+    <h2 class="reveal">Foundation.</h2>
+    <div class="edu-grid reveal">
+      <div class="edu-card">
+        <div class="edu-degree">BEng Mechanical Engineering, Co-op</div>
+        <div class="edu-school">York University · 2025 — Present</div>
+        <p class="edu-body">Developing a rigorous mechanical engineering foundation while connecting coursework to real hardware, sensors, research, and hands-on builds outside the classroom.</p>
+        <div class="hero-tags" style="margin-top:1.5rem;">
+          <span class="tag" style="border-color:rgba(242,237,216,0.4);color:rgba(242,237,216,0.8);">Mech Design</span>
+          <span class="tag" style="border-color:rgba(242,237,216,0.4);color:rgba(242,237,216,0.8);">Engineering Labs</span>
+          <span class="tag" style="border-color:rgba(242,237,216,0.4);color:rgba(242,237,216,0.8);">Co-op</span>
+        </div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-degree">International Baccalaureate Diploma</div>
+        <div class="edu-school">Turner Fenton Secondary · Graduated 2025</div>
+        <p class="edu-body">Completed HL Mathematics, HL Chemistry, and HL English. Built strong analytical, writing, and independent research skills through the IB framework.</p>
+        <div class="hero-tags" style="margin-top:1.5rem;">
+          <span class="tag">HL Math</span>
+          <span class="tag">HL Chemistry</span>
+          <span class="tag">Research Methods</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section" id="contact" style="padding:0; border-bottom:2px solid var(--ink);">
+    <div class="contact-left">
+      <div>
+        <div class="section-label" style="color:rgba(242,237,216,0.5);">06 / Contact</div>
+        <h2>Let's talk.</h2>
+      </div>
+      <p>
+        Open to co-op opportunities, research work, and conversations with people working in aerospace, automotive, manufacturing, testing, or hardware R&D.
+      </p>
+      <div class="stamp" style="transform:rotate(1deg); border-color:rgba(242,237,216,0.5); color:rgba(242,237,216,0.6);">Available for Co-op 2026</div>
+    </div>
+    <div class="contact-right">
+      <a class="contact-link" href="mailto:harshilj4r@gmail.com">
+        <span class="cl-icon">📧</span>
+        <span class="cl-label">Email</span>
+        harshilj4r@gmail.com
+      </a>
+      <a class="contact-link" href="tel:6477099585">
+        <span class="cl-icon">📱</span>
+        <span class="cl-label">Phone</span>
+        (647) 709-9585
+      </a>
+      <a class="contact-link" href="https://www.linkedin.com/in/harshil-jadawala/" target="_blank" rel="noopener">
+        <span class="cl-icon">💼</span>
+        <span class="cl-label">LinkedIn</span>
+        harshil-jadawala
+      </a>
+      <div class="contact-link" style="cursor:default;">
+        <span class="cl-icon">📍</span>
+        <span class="cl-label">Location</span>
+        Toronto / GTA, Ontario
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>Harshil Jadawala — Mechanical Engineering Portfolio</span>
+    <span id="year"></span>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // ── Airplane slideshow ──
+    let planeIdx = 0;
+    const planeSlides = document.querySelectorAll('#planeSlideshow .slide');
+    const planeDotBtns = document.querySelectorAll('#planeDots .dot');
+
+    function planeGoTo(n) {
+      // pause YouTube iframe by resetting src briefly
+      const curFrame = planeSlides[planeIdx].querySelector('iframe');
+      if (curFrame) {
+        const src = curFrame.src;
+        curFrame.src = '';
+        curFrame.src = src;
+      }
+      planeSlides[planeIdx].classList.remove('active');
+      planeDotBtns[planeIdx].classList.remove('active');
+      planeIdx = (n + planeSlides.length) % planeSlides.length;
+      planeSlides[planeIdx].classList.add('active');
+      planeDotBtns[planeIdx].classList.add('active');
+    }
+
+    function planeSlideNext() { planeGoTo(planeIdx + 1); }
+    function planeSlidePrev() { planeGoTo(planeIdx - 1); }
+
+    // keyboard support when hovering slideshow
+    document.getElementById('planeSlideshow').addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight') planeSlideNext();
+      if (e.key === 'ArrowLeft') planeSlidePrev();
+    });
+
+    // Scroll reveal
+    const reveals = document.querySelectorAll(".reveal");
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add("visible");
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08 });
+    reveals.forEach(r => obs.observe(r));
+
+    // Active nav
+    const sections = document.querySelectorAll("section[id]");
+    const links = document.querySelectorAll(".nav-links a");
+    window.addEventListener("scroll", () => {
+      let cur = "";
+      sections.forEach(s => { if (window.scrollY >= s.offsetTop - 120) cur = s.id; });
+      links.forEach(l => l.classList.toggle("active", l.getAttribute("href") === "#" + cur));
+    }, { passive: true });
+  </script>
+</body>
+</html>
