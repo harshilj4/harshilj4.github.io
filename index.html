@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>HJ-1 // FLIGHT SYSTEMS — HARSHIL JADAWALA</title>
-<meta name="description" content="Harshil Jadawala — Mechanical Engineering, York University. Flight systems portfolio."/>
+<title>HJ-1 // HARDWARE + FLIGHT SYSTEMS — HARSHIL JADAWALA</title>
+<meta name="description" content="Harshil Jadawala — Mechanical Engineering at York University. Hardware, sensors, aviation, and prototype engineering portfolio."/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Share+Tech+Mono&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
@@ -792,7 +792,7 @@ nav{
 }
 
 /* ═══════════════════════════════════════════════════════
-   SYSTEMS DIAGNOSTIC (SKILLS)
+   SYSTEMS CHECKLIST (SKILLS)
 ═══════════════════════════════════════════════════════ */
 .systems-grid{
   display:grid;
@@ -986,6 +986,285 @@ footer span{color:var(--amber);opacity:.6;}
   97%{opacity:.4;}98%{opacity:1;}
 }
 
+
+/* ═══════════════════════════════════════════════════════
+   PORTFOLIO UPGRADE: FLIGHT PLAN + ABOUT + PROJECT DEPTH
+═══════════════════════════════════════════════════════ */
+body::before{
+  content:'';
+  position:fixed;inset:0;
+  pointer-events:none;z-index:-1;
+  background:
+    radial-gradient(circle at 16% 22%, rgba(56,200,232,.055), transparent 28%),
+    radial-gradient(circle at 86% 70%, rgba(232,160,32,.045), transparent 30%),
+    linear-gradient(115deg, rgba(255,255,255,.018) 0 1px, transparent 1px 18px);
+}
+.flight-plan-sidebar{
+  position:fixed;right:18px;top:50%;
+  transform:translateY(-50%);
+  width:92px;height:78vh;max-height:780px;min-height:460px;
+  z-index:930;
+  pointer-events:none;
+  opacity:.72;
+  filter:drop-shadow(0 0 10px rgba(232,160,32,.18));
+}
+.fp-label{
+  position:absolute;top:-30px;right:0;
+  font-family:var(--font-m);font-size:.56rem;
+  letter-spacing:.18em;color:var(--muted);
+  writing-mode:vertical-rl;
+  transform:translateX(8px);
+}
+.fp-map{width:100%;height:100%;overflow:visible;}
+.fp-path-base,.fp-path-progress{
+  fill:none;stroke-linecap:round;stroke-linejoin:round;
+  vector-effect:non-scaling-stroke;
+}
+.fp-path-base{stroke:rgba(232,160,32,.16);stroke-width:1.5;stroke-dasharray:7 11;}
+.fp-path-progress{stroke:var(--amber-b);stroke-width:2.2;stroke-dasharray:1;stroke-dashoffset:1;}
+.fp-nodes circle{fill:var(--bg);stroke:var(--amber);stroke-width:1.4;vector-effect:non-scaling-stroke;}
+.fp-plane-marker{fill:var(--amber-b);stroke:var(--bg);stroke-width:.7;transform-box:fill-box;transform-origin:center;filter:drop-shadow(0 0 8px rgba(255,204,68,.65));}
+.fp-readout{
+  position:absolute;right:4px;bottom:-34px;
+  display:flex;gap:.45rem;align-items:center;justify-content:flex-end;
+  font-family:var(--font-m);font-size:.58rem;letter-spacing:.14em;color:var(--amber);
+}
+.fp-readout small{color:var(--muted);font-size:.55rem;}
+
+/* About / pilot briefing */
+#about{
+  background:
+    linear-gradient(180deg, rgba(232,160,32,.025), transparent 38%),
+    radial-gradient(circle at 72% 28%, rgba(56,200,232,.05), transparent 30%);
+}
+.about-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1.05fr) minmax(300px,.95fr);
+  gap:2px;
+  align-items:stretch;
+}
+.about-core,.about-stack,.about-signal-card{
+  border:1px solid var(--line);
+  background:rgba(6,10,18,.86);
+  backdrop-filter:blur(10px);
+}
+.about-core{padding:2.2rem;position:relative;overflow:hidden;}
+.about-core::after{
+  content:'HJ-001';
+  position:absolute;right:-18px;bottom:-20px;
+  font-family:var(--font-d);font-size:5rem;font-weight:900;
+  color:rgba(232,160,32,.035);letter-spacing:-.06em;
+}
+.about-eyebrow{
+  font-family:var(--font-m);font-size:.62rem;letter-spacing:.18em;
+  color:var(--green);margin-bottom:1rem;
+}
+.about-lede{
+  font-family:var(--font-d);font-size:clamp(1.35rem,2.5vw,2.2rem);
+  line-height:1.15;font-weight:800;letter-spacing:-.04em;
+  color:var(--amber-b);text-shadow:var(--glow-sm);
+  max-width:820px;margin-bottom:1.2rem;
+}
+.about-copy{font-size:.96rem;line-height:1.8;color:var(--text);max-width:760px;margin-bottom:1rem;}
+.about-highlight{
+  margin-top:1.4rem;padding:1rem 1.1rem;
+  border-left:3px solid var(--amber);
+  background:rgba(232,160,32,.045);
+  font-family:var(--font-m);font-size:.72rem;line-height:1.7;color:#8da0a8;
+}
+.about-highlight strong{color:var(--amber-b);font-weight:700;}
+.about-stack{
+  display:grid;grid-template-columns:1fr 1fr;gap:0;
+}
+.interest-card{
+  min-height:190px;padding:1.35rem;
+  border-right:1px solid var(--line);border-bottom:1px solid var(--line);
+  position:relative;overflow:hidden;
+  transition:background .2s, transform .2s, border-color .2s;
+}
+.interest-card:nth-child(2n){border-right:none;}
+.interest-card:nth-last-child(-n+2){border-bottom:none;}
+.interest-card:hover{background:rgba(232,160,32,.045);transform:translateY(-3px);border-color:rgba(232,160,32,.24);}
+.interest-icon{font-size:1.35rem;margin-bottom:.9rem;filter:grayscale(.2);}
+.interest-title{
+  font-family:var(--font-d);font-size:.82rem;font-weight:800;
+  letter-spacing:.04em;color:var(--amber-b);margin-bottom:.55rem;
+}
+.interest-copy{font-size:.82rem;line-height:1.65;color:#8b9aa5;}
+.about-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:2px;}
+.about-metric{
+  border:1px solid var(--line);background:var(--panel);padding:1rem 1.2rem;
+}
+.metric-k{font-family:var(--font-m);font-size:.55rem;letter-spacing:.18em;color:var(--muted);margin-bottom:.35rem;}
+.metric-v{font-family:var(--font-d);font-size:.95rem;font-weight:800;color:var(--amber-b);}
+.metric-note{font-size:.72rem;line-height:1.45;color:#708090;margin-top:.3rem;}
+
+/* Angled / tighter mission deck */
+#missions{overflow:hidden;}
+#missions .sector-divider{margin-bottom:2rem;}
+.mission-featured{
+  max-width:1180px;
+  margin-left:auto;margin-right:auto;margin-bottom:34px!important;
+  transform-style:preserve-3d;
+  box-shadow:0 24px 80px rgba(0,0,0,.28);
+  transition:transform .35s ease,border-color .25s ease,box-shadow .25s ease;
+}
+.mission-featured.tilt-left{transform:perspective(1500px) rotateY(-4deg) rotateZ(-.55deg) scale(.965);}
+.mission-featured.tilt-right{transform:perspective(1500px) rotateY(4deg) rotateZ(.55deg) scale(.965);}
+.mission-featured.tilt-flat{transform:perspective(1500px) rotateX(.7deg) scale(.965);}
+.mission-featured:hover{
+  transform:perspective(1500px) rotateY(0) rotateZ(0) scale(.985) translateY(-6px);
+  border-color:rgba(255,204,68,.34);
+  box-shadow:0 30px 90px rgba(0,0,0,.36),0 0 42px rgba(232,160,32,.07);
+}
+.mission-body{grid-template-columns:minmax(0,1fr) 340px;}
+.mission-header{padding:.85rem 1.1rem;}
+.mission-title-row{padding:.75rem 1.1rem;}
+.mission-info{padding:1.15rem;gap:1rem;}
+.info-brief{font-size:.86rem;}
+.mission-logs li{font-size:.68rem;}
+.mission-featured::after{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(115deg, transparent 0 52%, rgba(255,204,68,.055) 53%, transparent 54% 100%);
+  opacity:.5;
+}
+.missions-row{max-width:1180px;margin-left:auto;margin-right:auto;transform:scale(.98);}
+.mission-card{min-height:230px;}
+.mission-card:hover{transform:translateY(-4px) rotateZ(-.25deg);}
+
+/* Recruiter utility polish */
+.nav-links{gap:1.45rem;}
+.comm-link.resume-request{border-color:rgba(40,224,130,.28);}
+.comm-link.resume-request:hover{border-color:rgba(40,224,130,.58);color:var(--green);background:rgba(40,224,130,.045);}
+
+
+
+/* ═══════════════════════════════════════════════════════
+   CURRENT OPERATIONS + SCROLL-LINKED MOTION
+═══════════════════════════════════════════════════════ */
+.radar-bg{
+  transition:transform .18s ease-out, opacity .18s ease-out;
+  will-change:transform;
+}
+#cockpit::after{
+  content:'';
+  position:absolute;inset:0;
+  pointer-events:none;
+  background:radial-gradient(circle at var(--radar-hot-x,55%) var(--radar-hot-y,50%), rgba(255,204,68,.055), transparent 26%);
+  opacity:.55;
+  transition:background-position .15s ease;
+}
+#current{
+  background:
+    linear-gradient(180deg, rgba(40,224,130,.025), transparent 40%),
+    radial-gradient(circle at 80% 20%, rgba(40,224,130,.055), transparent 28%),
+    radial-gradient(circle at 18% 82%, rgba(232,160,32,.04), transparent 32%);
+  overflow:hidden;
+}
+.current-ops-grid{
+  display:grid;
+  grid-template-columns:1.12fr .88fr;
+  gap:2px;
+  max-width:1180px;
+  margin:0 auto;
+}
+.current-console,.ops-stack,.ops-card{
+  border:1px solid var(--line);
+  background:rgba(6,10,18,.9);
+  backdrop-filter:blur(10px);
+}
+.current-console{
+  padding:2rem;
+  position:relative;
+  min-height:420px;
+  overflow:hidden;
+}
+.current-console::before{
+  content:'';
+  position:absolute;inset:0;
+  background:
+    linear-gradient(90deg, transparent 0 49%, rgba(232,160,32,.08) 50%, transparent 51% 100%),
+    linear-gradient(0deg, transparent 0 49%, rgba(232,160,32,.06) 50%, transparent 51% 100%);
+  background-size:56px 56px;
+  opacity:.22;
+  mask-image:radial-gradient(circle at 54% 48%, #000 0 34%, transparent 70%);
+  pointer-events:none;
+}
+.ops-radar-ring{
+  position:absolute;
+  right:-90px;bottom:-130px;
+  width:360px;height:360px;border-radius:50%;
+  border:1px solid rgba(232,160,32,.15);
+  box-shadow:inset 0 0 0 48px rgba(232,160,32,.012), inset 0 0 0 96px rgba(232,160,32,.018), inset 0 0 0 145px rgba(232,160,32,.012);
+  animation:ops-pulse 4.8s ease-in-out infinite;
+}
+@keyframes ops-pulse{0%,100%{transform:scale(1);opacity:.6;}50%{transform:scale(1.04);opacity:.95;}}
+.current-kicker{
+  font-family:var(--font-m);font-size:.62rem;letter-spacing:.2em;
+  color:var(--green);margin-bottom:1rem;position:relative;z-index:1;
+}
+.current-title{
+  font-family:var(--font-d);font-size:clamp(1.5rem,3vw,2.65rem);
+  line-height:1.03;font-weight:900;letter-spacing:-.04em;color:var(--amber-b);
+  text-shadow:var(--glow-sm);margin-bottom:1.1rem;position:relative;z-index:1;
+}
+.current-copy{
+  max-width:680px;font-size:.95rem;line-height:1.75;color:var(--text);
+  margin-bottom:1.4rem;position:relative;z-index:1;
+}
+.ops-checklist{
+  list-style:none;display:grid;gap:.7rem;position:relative;z-index:1;
+}
+.ops-checklist li{
+  display:flex;align-items:flex-start;gap:.75rem;
+  font-family:var(--font-m);font-size:.72rem;line-height:1.55;color:#8796a2;
+  padding:.72rem .85rem;border:1px solid rgba(232,160,32,.09);
+  background:rgba(3,5,10,.4);
+}
+.ops-checklist li::before{
+  content:'●';color:var(--green);font-size:.55rem;margin-top:.2rem;
+  filter:drop-shadow(0 0 6px rgba(40,224,130,.5));
+}
+.ops-stack{display:grid;grid-template-columns:1fr;gap:2px;background:transparent;border:none;}
+.ops-card{
+  padding:1.25rem 1.35rem;
+  min-height:104px;
+  position:relative;overflow:hidden;
+  transition:transform .2s ease,border-color .2s ease,background .2s ease;
+}
+.ops-card::after{
+  content:'';position:absolute;right:0;top:0;bottom:0;width:3px;
+  background:linear-gradient(to bottom,var(--green),var(--amber));
+  opacity:.45;
+}
+.ops-card:hover{transform:translateX(-6px);border-color:rgba(40,224,130,.28);background:rgba(40,224,130,.035);}
+.ops-card-top{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:.45rem;}
+.ops-id{font-family:var(--font-m);font-size:.56rem;letter-spacing:.18em;color:var(--muted);}
+.ops-status{font-family:var(--font-m);font-size:.52rem;letter-spacing:.14em;color:var(--green);border:1px solid rgba(40,224,130,.32);padding:.16rem .45rem;}
+.ops-name{font-family:var(--font-d);font-size:.9rem;font-weight:800;color:var(--amber-b);letter-spacing:-.02em;margin-bottom:.35rem;}
+.ops-desc{font-size:.8rem;line-height:1.55;color:#8b9aa5;}
+.ops-progress{height:3px;background:var(--dim);margin-top:.8rem;overflow:hidden;}
+.ops-progress span{display:block;height:100%;background:linear-gradient(to right,var(--green),var(--amber));box-shadow:var(--glow-sm);}
+.mission-featured{
+  --drift-y:0px;
+  --drift-yaw:0deg;
+  --drift-z:0deg;
+  will-change:transform;
+}
+.mission-featured.tilt-left{transform:perspective(1500px) rotateY(calc(-4deg + var(--drift-yaw))) rotateZ(calc(-.55deg + var(--drift-z))) scale(.965) translateY(var(--drift-y));}
+.mission-featured.tilt-right{transform:perspective(1500px) rotateY(calc(4deg + var(--drift-yaw))) rotateZ(calc(.55deg + var(--drift-z))) scale(.965) translateY(var(--drift-y));}
+.mission-featured.tilt-flat{transform:perspective(1500px) rotateX(.7deg) rotateY(var(--drift-yaw)) rotateZ(var(--drift-z)) scale(.965) translateY(var(--drift-y));}
+.mission-card{
+  --card-drift:0px;
+  transform:translateY(var(--card-drift));
+  will-change:transform;
+}
+body.boot-locked{overflow:hidden;}
+@media(max-width:860px){
+  .current-ops-grid{grid-template-columns:1fr;}
+  .current-console{min-height:auto;padding:1.6rem;}
+}
+
 /* ═══════════════════════════════════════════════════════
    RESPONSIVE
 ═══════════════════════════════════════════════════════ */
@@ -1015,19 +1294,817 @@ footer span{color:var(--amber);opacity:.6;}
   .sys-col{border-right:none!important;border-bottom:1px solid var(--line);}
   .callsign-first,.callsign-last{font-size:3.4rem;}
 }
+
+@media(max-width:1180px){
+  .flight-plan-sidebar{opacity:.42;right:6px;width:68px;}
+}
+@media(max-width:860px){
+  .flight-plan-sidebar{display:none;}
+  .about-grid{grid-template-columns:1fr;}
+  .about-stack{grid-template-columns:1fr 1fr;}
+  .about-metrics{grid-template-columns:1fr;}
+  .mission-featured,.mission-featured.tilt-left,.mission-featured.tilt-right,.mission-featured.tilt-flat{transform:none!important;max-width:100%;}
+  .mission-featured:hover{transform:translateY(-3px)!important;}
+}
+@media(max-width:600px){
+  .about-core{padding:1.5rem;}
+  .about-stack{grid-template-columns:1fr;}
+  .interest-card{border-right:none!important;}
+  .interest-card:nth-last-child(-n+2){border-bottom:1px solid var(--line);}
+  .interest-card:last-child{border-bottom:none;}
+}
+
+
+/* ═══════════════════════════════════════════════════════
+   ELITE UPGRADE: RECRUITER MODE + AIRFRAME SCAN + DRAG SCROLL
+═══════════════════════════════════════════════════════ */
+.mode-toggle{
+  display:flex;flex-direction:column;align-items:flex-start;justify-content:center;
+  gap:.08rem;
+  min-width:134px;
+  padding:.42rem .7rem;
+  border:1px solid rgba(232,160,32,.35);
+  background:rgba(232,160,32,.035);
+  color:var(--amber);
+  cursor:pointer;
+  transition:background .18s,border-color .18s,color .18s,box-shadow .18s,transform .18s;
+}
+.mode-toggle:hover{
+  background:rgba(232,160,32,.12);
+  border-color:var(--amber);
+  box-shadow:var(--glow-sm);
+  transform:translateY(-1px);
+}
+.mode-toggle-main{
+  font-family:var(--font-m);
+  font-size:.58rem;
+  letter-spacing:.16em;
+  line-height:1.05;
+}
+.mode-toggle-sub{
+  font-family:var(--font-b);
+  font-size:.56rem;
+  color:#718091;
+  letter-spacing:.04em;
+}
+body.recruiter-mode{
+  background:#05070b;
+}
+body.recruiter-mode #scanlines{opacity:.18;}
+body.recruiter-mode .mode-toggle{
+  border-color:rgba(40,224,130,.55);
+  background:rgba(40,224,130,.08);
+  color:var(--green);
+}
+body.recruiter-mode .mode-toggle-sub{color:#8a9d95;}
+body.recruiter-mode .radar-bg,
+body.recruiter-mode .ops-radar-ring,
+body.recruiter-mode #cockpit::after,
+body.recruiter-mode .flight-plan-sidebar{
+  opacity:0!important;
+  pointer-events:none!important;
+}
+body.recruiter-mode .radar-sweep,
+body.recruiter-mode .hdg-tape-scroll,
+body.recruiter-mode .status-dot,
+body.recruiter-mode .wip-step.now .wip-dot,
+body.recruiter-mode .ops-radar-ring{
+  animation:none!important;
+}
+body.recruiter-mode .hdg-tape,
+body.recruiter-mode .hero-instruments,
+body.recruiter-mode .inst-tape{
+  display:none!important;
+}
+body.recruiter-mode .hero-grid{
+  grid-template-columns:minmax(0,1000px);
+  justify-content:center;
+}
+body.recruiter-mode .hero-center{
+  border:1px solid rgba(232,160,32,.14);
+  background:rgba(6,10,18,.72);
+  padding:2rem;
+  backdrop-filter:blur(10px);
+}
+body.recruiter-mode .callsign-first,
+body.recruiter-mode .callsign-last{
+  font-size:clamp(2.65rem,6vw,5rem);
+}
+body.recruiter-mode .section{
+  padding-top:68px;
+  padding-bottom:68px;
+}
+body.recruiter-mode .sector-divider h2{
+  color:#f2c45a;
+}
+body.recruiter-mode .mission-featured,
+body.recruiter-mode .mission-featured.tilt-left,
+body.recruiter-mode .mission-featured.tilt-right,
+body.recruiter-mode .mission-featured.tilt-flat{
+  transform:none!important;
+  max-width:1120px;
+  box-shadow:0 18px 45px rgba(0,0,0,.22);
+}
+body.recruiter-mode .mission-featured:hover{
+  transform:translateY(-2px)!important;
+}
+body.recruiter-mode .mission-featured::after{
+  display:none;
+}
+body.recruiter-mode .mission-body{
+  grid-template-columns:minmax(0,.9fr) minmax(330px,.75fr);
+}
+body.recruiter-mode .reveal{
+  opacity:1!important;
+  transform:none!important;
+}
+body.recruiter-mode .flight-plan-sidebar{
+  transform:translate(120px,-50%)!important;
+}
+body.recruiter-mode .current-console::before{
+  opacity:.06;
+}
+body.recruiter-mode::before{
+  opacity:.08;
+}
+.recruiter-summary{
+  display:none;
+  border:1px solid rgba(40,224,130,.22);
+  background:rgba(40,224,130,.035);
+  padding:.85rem .9rem;
+}
+body.recruiter-mode .recruiter-summary{
+  display:block;
+}
+.rs-title{
+  font-family:var(--font-m);
+  font-size:.58rem;
+  letter-spacing:.18em;
+  color:var(--green);
+  margin-bottom:.65rem;
+  text-transform:uppercase;
+}
+.rs-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:.42rem;
+}
+.rs-grid span{
+  font-size:.78rem;
+  line-height:1.5;
+  color:#9eabb1;
+}
+.rs-grid strong{
+  display:inline-block;
+  min-width:58px;
+  color:var(--amber-b);
+  font-family:var(--font-m);
+  font-size:.67rem;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+
+/* Draggable flight-plan scroll control */
+.flight-plan-sidebar{
+  pointer-events:auto;
+  user-select:none;
+}
+.fp-map{
+  cursor:grab;
+  touch-action:none;
+}
+.flight-plan-sidebar.dragging .fp-map{
+  cursor:grabbing;
+}
+.flight-plan-sidebar.dragging{
+  opacity:.96;
+  filter:drop-shadow(0 0 18px rgba(255,204,68,.35));
+}
+.fp-drag-hint{
+  position:absolute;
+  right:0;
+  bottom:-58px;
+  padding:.25rem .4rem;
+  border:1px solid rgba(232,160,32,.22);
+  background:rgba(3,5,10,.75);
+  font-family:var(--font-m);
+  font-size:.48rem;
+  letter-spacing:.14em;
+  color:#7f8790;
+  white-space:nowrap;
+  opacity:.65;
+}
+.flight-plan-sidebar:hover .fp-drag-hint,
+.flight-plan-sidebar.dragging .fp-drag-hint{
+  color:var(--amber-b);
+  border-color:rgba(255,204,68,.4);
+  opacity:1;
+}
+.flight-plan-sidebar.dragging .fp-plane-marker{
+  filter:drop-shadow(0 0 13px rgba(255,204,68,.95));
+}
+
+/* RC aircraft blueprint scan overlay */
+.airframe-project .footage-wrap{
+  overflow:hidden;
+}
+.airframe-blueprint{
+  position:absolute;
+  inset:0;
+  z-index:8;
+  opacity:0;
+  pointer-events:none;
+  transform:scale(1.015);
+  transition:opacity .32s ease, transform .32s ease;
+  border-right:1px solid rgba(56,200,232,.18);
+}
+.airframe-project:hover .airframe-blueprint,
+.airframe-project:focus-within .airframe-blueprint{
+  opacity:1;
+  transform:scale(1);
+}
+.airframe-blueprint::after{
+  content:'';
+  position:absolute;
+  left:0;right:0;top:-35%;
+  height:32%;
+  background:linear-gradient(to bottom, transparent, rgba(56,200,232,.16), transparent);
+  opacity:.9;
+  transform:translateY(-20%);
+}
+.airframe-project:hover .airframe-blueprint::after{
+  animation:airframe-scan 2.1s ease-in-out infinite;
+}
+@keyframes airframe-scan{
+  0%{transform:translateY(-20%);}
+  100%{transform:translateY(470%);}
+}
+.blueprint-status{
+  position:absolute;
+  top:10px;left:12px;
+  z-index:2;
+  padding:.35rem .55rem;
+  border:1px solid rgba(56,200,232,.32);
+  background:rgba(0,0,0,.55);
+  font-family:var(--font-m);
+  font-size:.58rem;
+  letter-spacing:.18em;
+  color:var(--cyan);
+  text-shadow:0 0 10px rgba(56,200,232,.55);
+}
+.blueprint-svg{
+  width:100%;
+  height:100%;
+  display:block;
+}
+.bp-line{
+  fill:none;
+  stroke:rgba(56,200,232,.82);
+  stroke-width:2.2;
+  vector-effect:non-scaling-stroke;
+}
+.bp-line.main{
+  stroke:rgba(255,204,68,.82);
+  stroke-width:2.4;
+}
+.bp-line.dashed{
+  stroke-dasharray:8 8;
+  stroke:rgba(40,224,130,.7);
+}
+.bp-dot{
+  fill:rgba(255,204,68,.95);
+  stroke:#03050a;
+  stroke-width:2;
+}
+.bp-part{
+  fill:rgba(232,160,32,.12);
+  stroke:rgba(255,204,68,.9);
+  stroke-width:1.7;
+}
+.bp-wire{
+  fill:none;
+  stroke:rgba(40,224,130,.76);
+  stroke-width:2;
+  stroke-dasharray:5 7;
+}
+.bp-callout{
+  opacity:0;
+  transform:translateY(7px);
+  transition:opacity .22s ease, transform .22s ease;
+}
+.airframe-project:hover .bp-callout{
+  opacity:1;
+  transform:translateY(0);
+}
+.airframe-project:hover .callout-1{transition-delay:.05s;}
+.airframe-project:hover .callout-2{transition-delay:.12s;}
+.airframe-project:hover .callout-3{transition-delay:.19s;}
+.airframe-project:hover .callout-4{transition-delay:.26s;}
+.airframe-project:hover .callout-5{transition-delay:.33s;}
+.airframe-project:hover .callout-6{transition-delay:.40s;}
+.bp-callout path{
+  fill:none;
+  stroke:rgba(255,204,68,.58);
+  stroke-width:1.4;
+  stroke-dasharray:6 6;
+  vector-effect:non-scaling-stroke;
+}
+.bp-callout text{
+  font-family:var(--font-m);
+  font-size:15px;
+  letter-spacing:.08em;
+  fill:#ffcc44;
+}
+.bp-callout text.mini{
+  font-size:11px;
+  fill:#8db4c0;
+  letter-spacing:.04em;
+}
+@media(max-width:1180px){
+  .mode-toggle{min-width:114px;padding:.38rem .55rem;}
+  .mode-toggle-main{font-size:.52rem;}
+  .mode-toggle-sub{display:none;}
+}
+@media(max-width:860px){
+  .mode-toggle{
+    margin-left:auto;
+    min-width:auto;
+  }
+  .airframe-blueprint{display:none;}
+  body.recruiter-mode .mission-body{grid-template-columns:1fr;}
+}
+
+
+/* Recruiter mode hard override: cleaner, faster-skimmable portfolio view */
+body.recruiter-mode .nav-logo-id{color:var(--green);}
+body.recruiter-mode nav{
+  background:rgba(5,7,11,.96);
+  border-bottom-color:rgba(40,224,130,.16);
+}
+body.recruiter-mode .nav-links a:hover,
+body.recruiter-mode .nav-links a.active{color:var(--green);}
+body.recruiter-mode .nav-links a::after{background:var(--green);}
+body.recruiter-mode .hero-badges .badge,
+body.recruiter-mode .badge{
+  border-color:rgba(40,224,130,.16);
+  color:#91aaa0;
+}
+body.recruiter-mode .mission-status.active,
+body.recruiter-mode .mission-status.complete{
+  animation:none!important;
+  border-color:rgba(40,224,130,.45);
+  color:var(--green);
+}
+body.recruiter-mode .airframe-blueprint{
+  display:none!important;
+}
+body.recruiter-mode .footage-label::before{content:'▣';}
+body.recruiter-mode .footage-label{
+  color:var(--green);
+  background:rgba(0,0,0,.78);
+}
+body.recruiter-mode .about-core,
+body.recruiter-mode .current-console,
+body.recruiter-mode .ops-card,
+body.recruiter-mode .mission-featured,
+body.recruiter-mode .mission-card,
+body.recruiter-mode .record-entry,
+body.recruiter-mode .sys-col,
+body.recruiter-mode .academy-card{
+  border-color:rgba(40,224,130,.12);
+}
+body.recruiter-mode .ops-card:hover,
+body.recruiter-mode .mission-card:hover{
+  transform:none!important;
+}
+
+
+/* ═══════════════════════════════════════════════════════
+   FINAL APPROACH UPGRADE: DEPTH, NOTES, TELEMETRY, GLITCH
+═══════════════════════════════════════════════════════ */
+:root{
+  --mx: 0;
+  --my: 0;
+}
+body{padding-bottom:34px;}
+body.system-glitch #site{
+  animation:system-glitch-shift .18s steps(2,end) 2;
+  filter:contrast(1.08) brightness(1.04) saturate(1.08);
+}
+body.system-glitch #scanlines{
+  opacity:.55;
+  background:
+    repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(232,160,32,.12) 2px, rgba(232,160,32,.12) 3px),
+    linear-gradient(90deg, rgba(224,56,56,.08), transparent 20%, rgba(56,200,232,.08) 70%, transparent);
+}
+@keyframes system-glitch-shift{
+  0%{transform:translate(0,0);}
+  30%{transform:translate(2px,-1px);}
+  60%{transform:translate(-2px,1px);}
+  100%{transform:translate(0,0);}
+}
+
+/* subtle cockpit glass parallax */
+#cockpit .hero-center,
+#cockpit .hero-instruments,
+#cockpit .hdg-tape,
+.wireframe-aircraft{
+  will-change:transform;
+  transition:transform .12s ease-out;
+}
+#cockpit .hero-center{
+  transform:translate3d(calc(var(--mx) * -9px), calc(var(--my) * -7px), 0);
+}
+#cockpit .hero-instruments{
+  transform:translate3d(calc(var(--mx) * 10px), calc(var(--my) * 8px), 0);
+}
+#cockpit .hdg-tape{
+  transform:translate3d(calc(var(--mx) * 4px), 0, 0);
+}
+#cockpit .instrument-box:nth-child(1){transform:translate3d(calc(var(--mx) * 4px), calc(var(--my) * 3px),0);}
+#cockpit .instrument-box:nth-child(2){transform:translate3d(calc(var(--mx) * 7px), calc(var(--my) * 5px),0);}
+body.recruiter-mode #cockpit .hero-center,
+body.recruiter-mode #cockpit .hero-instruments,
+body.recruiter-mode #cockpit .hdg-tape,
+body.recruiter-mode .wireframe-aircraft{
+  transform:none!important;
+}
+
+/* signature impossible animation: aircraft wireframe materializes behind the cockpit */
+.wireframe-aircraft{
+  position:absolute;
+  right:4vw;
+  bottom:8vh;
+  width:min(46vw,640px);
+  min-width:360px;
+  opacity:.26;
+  pointer-events:none;
+  z-index:0;
+  transform:translate3d(calc(var(--mx) * 18px), calc(var(--my) * 14px), 0) rotateX(calc(var(--my) * 5deg)) rotateY(calc(var(--mx) * -6deg));
+  filter:drop-shadow(0 0 22px rgba(255,204,68,.14));
+}
+.wireframe-aircraft svg{width:100%;height:auto;display:block;overflow:visible;}
+.wf-line{
+  fill:none;
+  stroke:rgba(255,204,68,.78);
+  stroke-width:1.4;
+  vector-effect:non-scaling-stroke;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  stroke-dasharray:820;
+  stroke-dashoffset:820;
+  animation:wf-draw 3.1s cubic-bezier(.16,1,.3,1) forwards, wf-breathe 6.5s ease-in-out 3.2s infinite;
+}
+.wf-line.cyan{stroke:rgba(56,200,232,.52);animation-delay:.25s,3.4s;}
+.wf-line.green{stroke:rgba(40,224,130,.45);animation-delay:.55s,3.7s;}
+.wf-node{fill:rgba(255,204,68,.9);filter:drop-shadow(0 0 6px rgba(255,204,68,.55));opacity:0;animation:wf-node 1s ease forwards 2.65s;}
+.wf-label{
+  font-family:var(--font-m);
+  font-size:11px;
+  letter-spacing:.18em;
+  fill:rgba(255,204,68,.72);
+  opacity:0;
+  animation:wf-node 1s ease forwards 2.9s;
+}
+@keyframes wf-draw{to{stroke-dashoffset:0;}}
+@keyframes wf-breathe{0%,100%{opacity:.65;}50%{opacity:1;}}
+@keyframes wf-node{to{opacity:1;}}
+body.recruiter-mode .wireframe-aircraft{opacity:.05;animation:none;}
+
+/* richer text hierarchy */
+.about-lede,.current-title,.mission-name,.rec-title{letter-spacing:-.045em;}
+.about-copy,.current-copy,.info-brief,.rec-bullets li,.mc-desc{color:#cfc1a0;}
+.about-copy,.current-copy{font-size:1.02rem;line-height:1.88;}
+.info-brief{
+  font-size:.96rem;
+  line-height:1.82;
+  color:#d2c29b;
+  padding:.75rem .85rem;
+  border-left:2px solid rgba(255,204,68,.32);
+  background:rgba(255,204,68,.028);
+}
+.rec-title{font-size:1.23rem;}
+.rec-bullets li{font-size:.94rem;line-height:1.75;}
+.mc-title{font-size:1.16rem;}
+.mc-desc{font-size:.94rem;line-height:1.78;}
+.sector-label{color:#687482;}
+.sector-divider h2{letter-spacing:-.035em;}
+
+/* aerospace system icons replacing emoji-style markers */
+.system-icon{
+  width:28px;height:28px;
+  display:inline-flex;align-items:center;justify-content:center;
+  color:var(--amber-b);
+  border:1px solid rgba(232,160,32,.18);
+  background:rgba(232,160,32,.035);
+  box-shadow:inset 0 0 18px rgba(232,160,32,.025);
+  flex:0 0 auto;
+}
+.system-icon svg{width:18px;height:18px;display:block;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+.interest-icon.system-icon{margin-bottom:1rem;}
+.mc-icon.system-icon{font-size:0;filter:none;}
+.comm-icon.system-icon{width:34px;height:34px;font-size:0;}
+
+/* mission outcome metrics */
+.mission-outcomes{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:.5rem;
+}
+.outcome-card{
+  border:1px solid rgba(232,160,32,.14);
+  background:linear-gradient(180deg,rgba(232,160,32,.045),rgba(232,160,32,.015));
+  padding:.78rem .85rem;
+  min-height:72px;
+  position:relative;
+  overflow:hidden;
+}
+.outcome-card::after{
+  content:'';
+  position:absolute;left:0;right:0;bottom:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--amber),transparent);
+  opacity:.35;
+}
+.outcome-k{
+  font-family:var(--font-m);
+  font-size:.52rem;
+  letter-spacing:.16em;
+  color:#778290;
+  margin-bottom:.38rem;
+}
+.outcome-v{
+  font-family:var(--font-d);
+  font-size:.77rem;
+  line-height:1.25;
+  color:var(--amber-b);
+  font-weight:800;
+}
+.compact-outcomes{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:.38rem;
+  padding:.72rem .78rem;
+  border:1px solid rgba(232,160,32,.12);
+  background:rgba(232,160,32,.026);
+}
+.compact-outcomes span{
+  font-family:var(--font-m);
+  font-size:.65rem;
+  line-height:1.45;
+  color:#909fab;
+}
+.compact-outcomes strong{color:var(--amber-b);font-weight:700;}
+
+/* engineering notes */
+.engineering-notes{
+  border:1px solid rgba(56,200,232,.18);
+  background:rgba(56,200,232,.026);
+  padding:.85rem;
+}
+.notes-topline{
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  margin-bottom:.65rem;
+}
+.notes-label{
+  font-family:var(--font-m);
+  font-size:.55rem;
+  letter-spacing:.18em;
+  color:var(--cyan);
+}
+.note-buttons{display:flex;flex-wrap:wrap;gap:.45rem;}
+.note-btn{
+  border:1px solid rgba(56,200,232,.28);
+  background:rgba(3,5,10,.54);
+  color:#94bdc8;
+  font-family:var(--font-m);
+  font-size:.58rem;
+  letter-spacing:.12em;
+  padding:.38rem .55rem;
+  cursor:pointer;
+  transition:background .16s,border-color .16s,color .16s,transform .16s;
+}
+.note-btn:hover,.note-btn:focus-visible{
+  background:rgba(56,200,232,.12);
+  border-color:rgba(56,200,232,.58);
+  color:var(--cyan);
+  transform:translateY(-1px);
+  outline:none;
+}
+.note-modal{
+  position:fixed;
+  inset:0;
+  z-index:10020;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:1.2rem;
+  background:rgba(0,0,0,.62);
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .18s ease;
+}
+.note-modal.open{opacity:1;pointer-events:auto;}
+.note-panel{
+  width:min(580px,92vw);
+  border:1px solid rgba(56,200,232,.34);
+  background:rgba(4,8,15,.96);
+  box-shadow:0 24px 90px rgba(0,0,0,.62),0 0 38px rgba(56,200,232,.08);
+  padding:1.15rem;
+  position:relative;
+}
+.note-panel::before{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(115deg,transparent 0 55%,rgba(56,200,232,.06) 56%,transparent 57% 100%);
+}
+.note-close{
+  position:absolute;top:.7rem;right:.75rem;
+  border:1px solid rgba(232,160,32,.28);
+  background:transparent;color:var(--amber);
+  font-family:var(--font-m);font-size:.75rem;
+  width:28px;height:28px;cursor:pointer;
+}
+.note-title{
+  font-family:var(--font-d);
+  font-size:1rem;
+  letter-spacing:.02em;
+  color:var(--amber-b);
+  margin-bottom:.35rem;
+  padding-right:2rem;
+}
+.note-subtitle{
+  font-family:var(--font-m);
+  font-size:.58rem;
+  letter-spacing:.18em;
+  color:var(--cyan);
+  margin-bottom:1rem;
+}
+.note-body{
+  color:#c4d0d2;
+  line-height:1.8;
+  font-size:.94rem;
+}
+.note-body strong{color:var(--amber-b);}
+
+/* live telemetry strip */
+.live-telemetry{
+  position:fixed;
+  left:0;right:0;bottom:0;
+  height:34px;
+  z-index:1200;
+  border-top:1px solid rgba(232,160,32,.16);
+  background:rgba(3,5,10,.92);
+  backdrop-filter:blur(12px);
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+}
+.live-telemetry::before,.live-telemetry::after{
+  content:'';
+  position:absolute;top:0;bottom:0;width:80px;z-index:2;pointer-events:none;
+}
+.live-telemetry::before{left:0;background:linear-gradient(90deg,var(--bg),transparent);}
+.live-telemetry::after{right:0;background:linear-gradient(270deg,var(--bg),transparent);}
+.telemetry-track{
+  display:flex;
+  width:max-content;
+  animation:telemetry-marquee 32s linear infinite;
+}
+.telemetry-group{
+  display:flex;align-items:center;gap:1.2rem;
+  padding-right:1.2rem;
+  font-family:var(--font-m);
+  font-size:.58rem;
+  letter-spacing:.16em;
+  color:#7d8792;
+  white-space:nowrap;
+}
+.telemetry-group strong{color:var(--amber-b);font-weight:700;}
+.telemetry-group span{display:inline-flex;align-items:center;gap:.35rem;}
+.telemetry-blip{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 8px rgba(40,224,130,.75);}
+@keyframes telemetry-marquee{to{transform:translateX(-50%);}}
+body.recruiter-mode .live-telemetry{
+  border-top-color:rgba(40,224,130,.16);
+}
+body.recruiter-mode .telemetry-group strong{color:var(--green);}
+
+/* tiny system anomaly */
+.system-alert{
+  position:fixed;
+  top:calc(var(--nav-h) + 14px);
+  right:22px;
+  z-index:10030;
+  opacity:0;
+  transform:translateY(-8px);
+  pointer-events:none;
+  transition:opacity .16s ease, transform .16s ease;
+  border:1px solid rgba(224,56,56,.45);
+  background:rgba(14,4,4,.88);
+  color:#ff9a7b;
+  padding:.55rem .75rem;
+  font-family:var(--font-m);
+  font-size:.58rem;
+  letter-spacing:.16em;
+  box-shadow:0 0 24px rgba(224,56,56,.12);
+}
+.system-alert.show{opacity:1;transform:translateY(0);}
+.system-alert strong{color:#ffcc44;}
+
+/* blueprint tilt and assembly */
+.airframe-project{--bp-x:0;--bp-y:0;}
+.airframe-project:hover .airframe-blueprint,
+.airframe-project:focus-within .airframe-blueprint{
+  transform:perspective(1100px) rotateX(calc(var(--bp-y) * -4deg)) rotateY(calc(var(--bp-x) * 5deg)) scale(1);
+}
+.airframe-project:hover .bp-line,
+.airframe-project:focus-within .bp-line{
+  stroke-dasharray:900;
+  stroke-dashoffset:900;
+  animation:bp-assemble 1.25s cubic-bezier(.16,1,.3,1) forwards;
+}
+.airframe-project:hover .bp-line:nth-child(2){animation-delay:.08s;}
+.airframe-project:hover .bp-line:nth-child(3){animation-delay:.14s;}
+.airframe-project:hover .bp-line:nth-child(4){animation-delay:.20s;}
+.airframe-project:hover .bp-line:nth-child(5){animation-delay:.26s;}
+.airframe-project:hover .bp-line:nth-child(6){animation-delay:.32s;}
+@keyframes bp-assemble{to{stroke-dashoffset:0;}}
+
+@media(max-width:860px){
+  body{padding-bottom:0;}
+  .live-telemetry{display:none;}
+  .wireframe-aircraft{display:none;}
+  #cockpit .hero-center,#cockpit .hero-instruments,#cockpit .hdg-tape{transform:none!important;}
+  .mission-outcomes{grid-template-columns:1fr;}
+}
+
 </style>
 </head>
-<body>
+<body class="boot-locked">
 
 <!-- SCANLINES -->
 <div id="scanlines" aria-hidden="true"></div>
+
+
+<!-- LIVE TELEMETRY STRIP -->
+<div class="live-telemetry" aria-hidden="true">
+  <div class="telemetry-track">
+    <div class="telemetry-group">
+      <span><i class="telemetry-blip"></i><strong>STATUS:</strong> ACTIVE</span>
+      <span><strong>LOCATION:</strong> TORONTO / GTA</span>
+      <span><strong>MODE:</strong> RESEARCH + PROTOTYPING</span>
+      <span><strong>SEEKING:</strong> FALL/WINTER INTERNSHIPS</span>
+      <span><strong>VECTOR:</strong> HARDWARE · SENSORS · CAD · TESTING</span>
+      <span><strong>CURRENT:</strong> LIG SENSOR SYSTEMS</span>
+    </div>
+    <div class="telemetry-group">
+      <span><i class="telemetry-blip"></i><strong>STATUS:</strong> ACTIVE</span>
+      <span><strong>LOCATION:</strong> TORONTO / GTA</span>
+      <span><strong>MODE:</strong> RESEARCH + PROTOTYPING</span>
+      <span><strong>SEEKING:</strong> FALL/WINTER INTERNSHIPS</span>
+      <span><strong>VECTOR:</strong> HARDWARE · SENSORS · CAD · TESTING</span>
+      <span><strong>CURRENT:</strong> LIG SENSOR SYSTEMS</span>
+    </div>
+  </div>
+</div>
+
+<div class="system-alert" id="systemAlert"><strong>SIGNAL INTERRUPTION DETECTED</strong> // AUTO-RECOVERED</div>
+
+<div class="note-modal" id="noteModal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="noteTitle">
+  <div class="note-panel">
+    <button class="note-close" id="noteClose" type="button" aria-label="Close engineering note">×</button>
+    <div class="note-title" id="noteTitle">ENGINEERING NOTE</div>
+    <div class="note-subtitle" id="noteSubtitle">BUILD LOG</div>
+    <div class="note-body" id="noteBody"></div>
+  </div>
+</div>
+
+
+<!-- SCROLL FLIGHT PLAN -->
+<aside class="flight-plan-sidebar" role="scrollbar" aria-label="Draggable flight plan scroll control" aria-orientation="vertical">
+  <div class="fp-label">FLIGHT PLAN</div>
+  <svg class="fp-map" viewBox="0 0 92 780" preserveAspectRatio="none">
+    <path id="fpPathBase" class="fp-path-base" d="M46 18 C 18 115 78 192 47 280 C 18 365 75 455 42 535 C 15 610 70 690 46 762"/>
+    <path id="fpPathProgress" class="fp-path-progress" d="M46 18 C 18 115 78 192 47 280 C 18 365 75 455 42 535 C 15 610 70 690 46 762"/>
+    <g class="fp-nodes">
+      <circle cx="46" cy="18" r="4"/>
+      <circle cx="47" cy="280" r="3"/>
+      <circle cx="42" cy="535" r="3"/>
+      <circle cx="46" cy="762" r="4"/>
+    </g>
+    <g id="fpPlaneMarker" class="fp-plane-marker">
+      <path d="M0 -12 L4 7 L0 4 L-4 7 Z"/>
+      <path d="M-12 -1 L12 -1 L0 -5 Z"/>
+    </g>
+  </svg>
+  <div class="fp-readout"><span id="fpStatus">TAKEOFF</span><small id="fpPct">000%</small></div>
+  <div class="fp-drag-hint">DRAG TO SCROLL</div>
+</aside>
 
 <!-- ═══════════ BOOT SEQUENCE ═══════════ -->
 <div id="boot" role="dialog" aria-label="System initializing">
   <div class="boot-inner">
     <div class="boot-header">
       <span class="boot-logo-text">HJ-1 // FLIGHT MANAGEMENT SYSTEM</span>
-      <button class="boot-skip" id="bootSkip" aria-label="Skip intro">SKIP ›</button>
+      <button class="boot-skip" id="bootSkip" aria-label="Enter site">ENTER SITE ›</button>
     </div>
     <div class="boot-terminal" id="bootTerminal" aria-live="polite"></div>
     <div class="boot-bar-wrap"><div class="boot-bar" id="bootBar"></div></div>
@@ -1045,13 +2122,19 @@ footer span{color:var(--amber);opacity:.6;}
     <span class="nav-logo-sub">MECH ENG</span>
   </a>
   <ul class="nav-links">
-    <li><a href="#cockpit">COCKPIT</a></li>
-    <li><a href="#missions">MISSIONS</a></li>
-    <li><a href="#record">RECORD</a></li>
-    <li><a href="#systems">SYSTEMS</a></li>
-    <li><a href="#academy">ACADEMY</a></li>
-    <li><a href="#comms">COMMS</a></li>
+    <li><a href="#cockpit" data-flight-label="COCKPIT" data-recruiter-label="HOME">COCKPIT</a></li>
+    <li><a href="#about" data-flight-label="ABOUT" data-recruiter-label="ABOUT">ABOUT</a></li>
+    <li><a href="#record" data-flight-label="RECORD" data-recruiter-label="EXPERIENCE">RECORD</a></li>
+    <li><a href="#current" data-flight-label="CURRENT" data-recruiter-label="CURRENT WORK">CURRENT</a></li>
+    <li><a href="#missions" data-flight-label="MISSIONS" data-recruiter-label="PROJECTS">MISSIONS</a></li>
+    <li><a href="#systems" data-flight-label="SYSTEMS" data-recruiter-label="SKILLS">SYSTEMS</a></li>
+    <li><a href="#academy" data-flight-label="ACADEMY" data-recruiter-label="EDUCATION">ACADEMY</a></li>
+    <li><a href="#comms" data-flight-label="COMMS" data-recruiter-label="CONTACT">COMMS</a></li>
   </ul>
+  <button class="mode-toggle" id="modeToggle" type="button" aria-pressed="false">
+    <span class="mode-toggle-main">RECRUITER MODE</span>
+    <span class="mode-toggle-sub">clean view</span>
+  </button>
   <div class="nav-telem" aria-label="Flight telemetry">
     <span>HDG&nbsp;<span class="telem-val" id="navHdg">270</span>°W</span>
     <span class="sep">|</span>
@@ -1102,9 +2185,9 @@ footer span{color:var(--amber);opacity:.6;}
     <div class="inst-tape" aria-hidden="true">
       <div class="tape-top-label">ALT</div>
       <div class="tape-track" style="height:200px;">
-        <div class="tape-fill" style="height:72%;"></div>
+        <div class="tape-fill" id="altTapeFill" style="height:10%;"></div>
       </div>
-      <div class="tape-num" id="altTape">35K</div>
+      <div class="tape-num" id="altTape">1K</div>
       <div class="tape-unit">FT</div>
     </div>
 
@@ -1144,7 +2227,8 @@ footer span{color:var(--amber);opacity:.6;}
         </div>
       </div>
       <div class="hero-ctas reveal">
-        <a class="btn-hud" href="#missions">VIEW MISSIONS</a>
+        <a class="btn-hud" href="#about">PILOT BRIEFING</a>
+        <a class="btn-hud ghost" href="#missions">VIEW MISSIONS</a>
         <a class="btn-hud ghost" href="#comms">OPEN COMMS</a>
       </div>
       <div class="hero-badges reveal">
@@ -1240,20 +2324,178 @@ footer span{color:var(--amber);opacity:.6;}
       <div class="tape-track" style="height:200px;">
         <div class="tape-fill" style="height:58%;"></div>
       </div>
-      <div class="tape-num">480</div>
+      <div class="tape-num" id="speedTape">120</div>
       <div class="tape-unit">KT</div>
     </div>
 
   </div><!-- /hero-grid -->
 </section>
 
+
+<!-- ═══════════ ABOUT / PILOT BRIEFING ═══════════ -->
+<section id="about" class="section">
+  <div class="sector-label reveal">SECTOR-01 // PILOT BRIEFING</div>
+  <div class="sector-divider reveal"><h2 data-flight-label="ABOUT THE BUILDER" data-recruiter-label="ABOUT ME">ABOUT THE BUILDER</h2></div>
+
+  <div class="about-grid">
+    <article class="about-core reveal">
+      <div class="about-eyebrow">CURRENT VECTOR // HARDWARE · SENSORS · FLIGHT</div>
+      <p class="about-lede">I’m a mechanical engineering student who learns fastest when the idea has to survive contact with real hardware.</p>
+      <p class="about-copy">My strongest interests sit where mechanical design, electronics, and testing overlap: building prototypes, collecting useful data, and improving the system until it behaves the way it should. I’m especially drawn to aerospace, automotive systems, manufacturing, and instrumentation because they reward precision, iteration, and proof over theory alone.</p>
+      <p class="about-copy">Right now, my research direction is focused on laser-induced graphene sensors for strain, temperature, and humidity. That means thinking about how material preparation, packaging, and measurement setup all work together to turn physical changes into signals you can trust.</p>
+      <div class="about-highlight"><strong>Engineering style:</strong> start with first principles, build the rough version, test honestly, fix what failed, document the change, then repeat until the system earns confidence.</div>
+    </article>
+
+    <div class="about-stack reveal">
+      <article class="interest-card">
+        <div class="interest-icon">⚡</div>
+        <div class="interest-title">LIG SENSORS</div>
+        <p class="interest-copy">LIG sensor development for strain, temperature, and humidity, including signal response, packaging, testing, and calibration.</p>
+      </article>
+      <article class="interest-card">
+        <div class="interest-icon">✈️</div>
+        <div class="interest-title">FLIGHT SYSTEMS</div>
+        <p class="interest-copy">Aircraft, airframes, control surfaces, stability, wiring, and the feedback loop between design choices and flight behavior.</p>
+      </article>
+      <article class="interest-card">
+        <div class="interest-icon">🛠️</div>
+        <div class="interest-title">PROTOTYPING</div>
+        <p class="interest-copy">CAD, Arduino, MATLAB, sensors, mechanical assemblies, and fast physical iteration from concept to working demo.</p>
+      </article>
+      <article class="interest-card">
+        <div class="interest-icon">📈</div>
+        <div class="interest-title">TEST + ITERATE</div>
+        <p class="interest-copy">Bench testing, field testing, logging, threshold tuning, and using failure data to make the next version cleaner.</p>
+      </article>
+    </div>
+  </div>
+
+  <div class="about-metrics reveal">
+    <div class="about-metric">
+      <div class="metric-k">CURRENT FOCUS</div>
+      <div class="metric-v">LIG SENSOR SYSTEMS</div>
+      <div class="metric-note">Strain, temperature, humidity, packaging, measurement, and repeatability.</div>
+    </div>
+    <div class="about-metric">
+      <div class="metric-k">BUILDER MODE</div>
+      <div class="metric-v">HARDWARE-FIRST</div>
+      <div class="metric-note">Projects are strongest when they can be touched, tested, and improved.</div>
+    </div>
+    <div class="about-metric">
+      <div class="metric-k">TARGET ROLES</div>
+      <div class="metric-v">CO-OP + R&D</div>
+      <div class="metric-note">Aerospace, automotive, manufacturing, testing, sensors, and hardware teams.</div>
+    </div>
+  </div>
+</section>
+<!-- ═══════════ FLIGHT RECORD ═══════════ -->
+<section id="record" class="section">
+  <div class="sector-label reveal">SECTOR-02 // FLIGHT RECORD</div>
+  <div class="sector-divider reveal"><h2 data-flight-label="SERVICE HISTORY" data-recruiter-label="WORK EXPERIENCE">SERVICE HISTORY</h2></div>
+
+  <div class="record-entry reveal">
+    <div class="rec-meta">
+      <div class="rec-period">MAY 2026 — PRESENT</div>
+      <div class="rec-org">York University<br/>Toronto, ON</div>
+    </div>
+    <div>
+      <div class="rec-title">Undergraduate Research Assistant</div>
+      <div class="rec-sub">Faculty Research Team — Laser-Induced Graphene Sensors</div>
+      <ul class="rec-bullets">
+        <li>Contributing to LIG sensor development for strain, temperature, and humidity measurement.</li>
+        <li>Working the full research loop: material prep → sensor fabrication → testing → documentation → iteration.</li>
+        <li>Collaborating with graduate students and project leads on flexible electronics and experimental design.</li>
+        <li>Building foundational understanding of how materials science and sensing connect to mechanical applications.</li>
+      </ul>
+      <div class="hero-badges" style="margin-top:1rem;">
+        <span class="badge">LIG SENSORS</span>
+        <span class="badge">RESEARCH</span>
+        <span class="badge">INSTRUMENTATION</span>
+        <span class="badge">TESTING</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="record-entry reveal">
+    <div class="rec-meta">
+      <div class="rec-period">SUMMER 2023</div>
+      <div class="rec-org">PLASP Child Care Services<br/>Peel Region, ON</div>
+    </div>
+    <div>
+      <div class="rec-title">IT Intern</div>
+      <div class="rec-sub">Device Operations — Peel Region Schools</div>
+      <ul class="rec-bullets">
+        <li>Configured and reprogrammed tablets deployed across Peel Region schools and childcare sites.</li>
+        <li>Diagnosed and resolved software and hardware issues; prepared large-scale equipment rollouts.</li>
+        <li>Supported device tracking, data handling, and deployment logistics in a structured environment.</li>
+        <li>Built troubleshooting fundamentals: isolate the fault, test the fix, document what changed.</li>
+      </ul>
+      <div class="hero-badges" style="margin-top:1rem;">
+        <span class="badge">TROUBLESHOOTING</span>
+        <span class="badge">DEVICE CONFIG</span>
+        <span class="badge">IT OPERATIONS</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════ CURRENT OPERATIONS ═══════════ -->
+<section id="current" class="section">
+  <div class="sector-label reveal">SECTOR-03 // CURRENT OPERATIONS</div>
+  <div class="sector-divider reveal"><h2 data-flight-label="CURRENTLY WORKING ON" data-recruiter-label="CURRENT WORK">CURRENTLY WORKING ON</h2></div>
+
+  <div class="current-ops-grid">
+    <article class="current-console reveal">
+      <div class="ops-radar-ring" aria-hidden="true"></div>
+      <div class="current-kicker">LIVE QUEUE // ACTIVE BUILDS + TARGET ROLES</div>
+      <h2 class="current-title">What I’m actively building, learning, and aiming toward right now.</h2>
+      <p class="current-copy">Active development queue: graphene sensing systems, aircraft refinement, real-time monitoring tools, and the engineering problems that only show up once something leaves the screen and enters the real world.
+</p>
+      <ul class="ops-checklist">
+        <li><strong>LIG sensor research:</strong>&nbsp;supporting development of laser-induced graphene sensors for strain, temperature, and humidity measurement.</li>
+        <li><strong>Aircraft design refinement:</strong>&nbsp;using CAD thinking to clean up airframe structure, packaging, balance, and manufacturability.</li>
+        <li><strong>Occupancy tracking app:</strong>&nbsp;moving the Noise Tracker idea from sensor demo toward a live system students could actually check.</li>
+        <li><strong>Fall internship search:</strong>&nbsp;targeting hands-on mechanical, aerospace, automotive, manufacturing, testing, sensors, and R&amp;D roles.</li>
+      </ul>
+    </article>
+
+    <div class="ops-stack reveal">
+      <article class="ops-card">
+        <div class="ops-card-top"><span class="ops-id">OP-01 // RESEARCH</span><span class="ops-status">ACTIVE</span></div>
+        <div class="ops-name">LIG Sensor Development</div>
+        <p class="ops-desc">Material prep, fabrication, packaging, testing, and documentation for multi-parameter sensor work.</p>
+        <div class="ops-progress"><span style="width:72%"></span></div>
+      </article>
+      <article class="ops-card">
+        <div class="ops-card-top"><span class="ops-id">OP-02 // CAD</span><span class="ops-status">ITERATING</span></div>
+        <div class="ops-name">RC Aircraft Fuselage Refinement</div>
+        <p class="ops-desc">Cleaning up geometry and thinking through balance, internal routing, serviceability, and structure.</p>
+        <div class="ops-progress"><span style="width:48%"></span></div>
+      </article>
+      <article class="ops-card">
+        <div class="ops-card-top"><span class="ops-id">OP-03 // PRODUCT</span><span class="ops-status">BUILDING</span></div>
+        <div class="ops-name">Campus Occupancy Backend</div>
+        <p class="ops-desc">Turning sensor classifications into a real-time status experience for libraries and study spaces.</p>
+        <div class="ops-progress"><span style="width:56%"></span></div>
+      </article>
+      <article class="ops-card">
+        <div class="ops-card-top"><span class="ops-id">OP-04 // CAREER</span><span class="ops-status">TARGETING</span></div>
+        <div class="ops-name">Fall Internship Search</div>
+        <p class="ops-desc">Positioning for hardware-heavy teams where testing, CAD, sensors, manufacturing, and systems matter.</p>
+        <div class="ops-progress"><span style="width:64%"></span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
 <!-- ═══════════ MISSIONS ═══════════ -->
 <section id="missions" class="section">
-  <div class="sector-label reveal">SECTOR-03 // MISSION CONTROL</div>
-  <div class="sector-divider reveal"><h2>ACTIVE MISSIONS + COMPLETED ASSIGNMENTS</h2></div>
+  <div class="sector-label reveal">SECTOR-04 // MISSION CONTROL</div>
+  <div class="sector-divider reveal"><h2 data-flight-label="HARDWARE I’VE ACTUALLY BUILT" data-recruiter-label="SELECTED PROJECTS">HARDWARE I’VE ACTUALLY BUILT</h2></div>
 
   <!-- M-01: WATERING SYSTEM -->
-  <div class="mission-featured reveal">
+  <div class="mission-featured reveal tilt-left">
     <div class="mission-header">
       <span class="mission-id">MISSION-01</span>
       <span class="mission-cls">// CLASSIFICATION: RESEARCH &amp; AUTOMATION</span>
@@ -1275,6 +2517,15 @@ footer span{color:var(--amber);opacity:.6;}
       </div>
       <div class="mission-info">
         <p class="info-brief">A fully closed-loop sensor-to-actuator system. Reads soil moisture in real time, applies threshold logic, and fires a pump via MOSFET — no manual intervention required. Built to demonstrate that control theory works just as well on a plant as on an aircraft.</p>
+        <div class="recruiter-summary">
+          <div class="rs-title">Recruiter snapshot</div>
+          <div class="rs-grid">
+            <span><strong>Problem</strong> Automate plant watering using real sensor feedback instead of fixed timing.</span>
+            <span><strong>Built</strong> Arduino/MATLAB control loop with moisture sensing, MOSFET pump control, logging, and emergency stop logic.</span>
+            <span><strong>Tools</strong> MATLAB, Arduino, Grove sensors, MOSFET switching, calibration, state-machine logic.</span>
+            <span><strong>Result</strong> Working hardware prototype with repeatable watering cycles and live system feedback.</span>
+          </div>
+        </div>
         <ul class="mission-logs">
           <li>Soil moisture sensor calibration and threshold decision logic</li>
           <li>MOSFET-based pump driver — safe high-current switching</li>
@@ -1294,7 +2545,7 @@ footer span{color:var(--amber);opacity:.6;}
   </div>
 
   <!-- M-02: AIRFRAME -->
-  <div class="mission-featured reveal" style="margin-top:2px;">
+  <div class="mission-featured reveal tilt-right airframe-project" style="margin-top:2px;">
     <div class="mission-header">
       <span class="mission-id">MISSION-02</span>
       <span class="mission-cls">// CLASSIFICATION: AVIATION &amp; STRUCTURES</span>
@@ -1335,9 +2586,88 @@ footer span{color:var(--amber);opacity:.6;}
             <button class="sdot" onclick="slideTo(3)" aria-label="Slide 4"></button>
           </div>
         </div>
+
+        <div class="airframe-blueprint" aria-hidden="true">
+          <div class="blueprint-status">AIRFRAME SCAN INITIATED</div>
+          <svg class="blueprint-svg" viewBox="0 0 800 450" preserveAspectRatio="xMidYMid meet">
+            <defs>
+              <pattern id="bpGrid" width="28" height="28" patternUnits="userSpaceOnUse">
+                <path d="M 28 0 L 0 0 0 28" fill="none" stroke="rgba(56,200,232,.15)" stroke-width="1"/>
+              </pattern>
+              <filter id="bpGlow">
+                <feGaussianBlur stdDeviation="2" result="blur"/>
+                <feMerge>
+                  <feMergeNode in="blur"/>
+                  <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+              </filter>
+            </defs>
+            <rect width="800" height="450" fill="rgba(2,8,16,.88)"/>
+            <rect width="800" height="450" fill="url(#bpGrid)" opacity=".55"/>
+
+            <g class="bp-plane" filter="url(#bpGlow)">
+              <path class="bp-line main" d="M150 226 L390 156 L652 226 L390 295 Z"/>
+              <path class="bp-line" d="M390 156 L390 295"/>
+              <path class="bp-line" d="M252 225 L530 225"/>
+              <path class="bp-line" d="M348 188 L435 188"/>
+              <path class="bp-line" d="M348 262 L435 262"/>
+              <path class="bp-line" d="M180 222 C230 200 300 190 390 188 C480 190 560 203 624 222"/>
+              <path class="bp-line dashed" d="M330 225 C365 205 417 204 456 225 C420 246 366 246 330 225"/>
+              <circle class="bp-dot" cx="365" cy="225" r="8"/>
+              <circle class="bp-dot" cx="292" cy="216" r="7"/>
+              <circle class="bp-dot" cx="488" cy="216" r="7"/>
+              <rect class="bp-part" x="377" y="205" width="28" height="40" rx="4"/>
+              <rect class="bp-part" x="335" y="213" width="34" height="24" rx="3"/>
+              <path class="bp-wire" d="M391 225 C420 207 450 206 488 216"/>
+              <path class="bp-wire" d="M391 225 C360 207 325 206 292 216"/>
+            </g>
+
+            <g class="bp-labels">
+              <g class="bp-callout callout-1">
+                <path d="M292 216 L218 124 L126 124"/>
+                <text x="36" y="118">MOTOR PLACEMENT</text>
+                <text x="36" y="137" class="mini">Twin brushed motor layout</text>
+              </g>
+              <g class="bp-callout callout-2">
+                <path d="M335 225 L250 312 L110 312"/>
+                <text x="32" y="306">BATTERY LOCATION</text>
+                <text x="32" y="325" class="mini">Mass placement for balance</text>
+              </g>
+              <g class="bp-callout callout-3">
+                <path d="M365 225 L365 85 L492 85"/>
+                <text x="506" y="79">CENTER OF GRAVITY</text>
+                <text x="506" y="98" class="mini">Main stability checkpoint</text>
+              </g>
+              <g class="bp-callout callout-4">
+                <path d="M530 225 L612 154 L732 154"/>
+                <text x="628" y="148">WING STRUCTURE</text>
+                <text x="628" y="167" class="mini">Foam span + airframe shell</text>
+              </g>
+              <g class="bp-callout callout-5">
+                <path d="M391 225 L515 303 L721 303"/>
+                <text x="544" y="297">WIRING ROUTE</text>
+                <text x="544" y="316" class="mini">ESC, battery, motor leads</text>
+              </g>
+              <g class="bp-callout callout-6">
+                <path d="M391 225 L468 374 L665 374"/>
+                <text x="486" y="368">FLIGHT CONTROLLER</text>
+                <text x="486" y="387" class="mini">GD005/GD006 PCB integration</text>
+              </g>
+            </g>
+          </svg>
+        </div>
       </div>
       <div class="mission-info">
         <p class="info-brief">Designed and assembled a flyable twin-motor RC aircraft. Every variable — motor placement, prop pitch, CG, battery routing, wiring — had immediate physical consequences on whether it flew or didn't. That feedback loop is what engineering is.</p>
+        <div class="recruiter-summary">
+          <div class="rs-title">Recruiter snapshot</div>
+          <div class="rs-grid">
+            <span><strong>Problem</strong> Turn a physical airframe concept into a flyable RC aircraft with stable power and balance.</span>
+            <span><strong>Built</strong> Foam airframe with twin-motor setup, battery placement, wiring integration, and flight testing iterations.</span>
+            <span><strong>Tools</strong> Airframe design, motor/prop setup, ESC wiring, battery placement, troubleshooting, flight testing.</span>
+            <span><strong>Result</strong> Built and tested a real aircraft, using flight behavior to guide design refinements.</span>
+          </div>
+        </div>
         <ul class="mission-logs">
           <li>Foam glider airframe modified for twin brushed motors</li>
           <li>GD005/GD006 flight controller wiring and integration</li>
@@ -1356,7 +2686,7 @@ footer span{color:var(--amber);opacity:.6;}
   </div>
 
   <!-- M-03: NOISE TRACKER -->
-  <div class="mission-featured reveal" style="margin-top:2px;">
+  <div class="mission-featured reveal tilt-flat" style="margin-top:2px;">
     <div class="mission-header">
       <span class="mission-id">MISSION-03</span>
       <span class="mission-cls">// CLASSIFICATION: SENSORS &amp; IoT &amp; UX RESEARCH</span>
@@ -1378,6 +2708,15 @@ footer span{color:var(--amber);opacity:.6;}
       </div>
       <div class="mission-info">
         <p class="info-brief">A sensor system that classifies ambient noise into real-time occupancy states for campus study spaces. Pilot testing at York's libraries confirmed the concept. Now building the live app infrastructure so you can check any space before you leave your room.</p>
+        <div class="recruiter-summary">
+          <div class="rs-title">Recruiter snapshot</div>
+          <div class="rs-grid">
+            <span><strong>Problem</strong> Help students identify quieter and more available campus study spaces.</span>
+            <span><strong>Built</strong> Noise classification prototype using sound sensing, threshold tuning, status display logic, and app planning.</span>
+            <span><strong>Tools</strong> Arduino, sound sensors, Java/MATLAB concepts, UI thinking, sensor thresholds, campus testing.</span>
+            <span><strong>Result</strong> Functional prototype direction with live room-status logic and a clear path toward occupancy mapping.</span>
+          </div>
+        </div>
         <ul class="mission-logs">
           <li>Sound sensor readings smoothed and classified: quiet / moderate / busy / full</li>
           <li>Pilot testing in York University libraries, study spaces, and common areas</li>
@@ -1443,61 +2782,10 @@ footer span{color:var(--amber);opacity:.6;}
   </div>
 </section>
 
-<!-- ═══════════ FLIGHT RECORD ═══════════ -->
-<section id="record" class="section">
-  <div class="sector-label reveal">SECTOR-02 // FLIGHT RECORD</div>
-  <div class="sector-divider reveal"><h2>SERVICE HISTORY</h2></div>
-
-  <div class="record-entry reveal">
-    <div class="rec-meta">
-      <div class="rec-period">MAY 2026 — PRESENT</div>
-      <div class="rec-org">York University<br/>Toronto, ON</div>
-    </div>
-    <div>
-      <div class="rec-title">Undergraduate Research Assistant</div>
-      <div class="rec-sub">Faculty Research Team — Laser-Induced Graphene Sensors</div>
-      <ul class="rec-bullets">
-        <li>Contributing to LIG sensor development for strain, temperature, and humidity measurement.</li>
-        <li>Working the full research loop: material prep → sensor fabrication → testing → documentation → iteration.</li>
-        <li>Collaborating with graduate students and project leads on flexible electronics and experimental design.</li>
-        <li>Building foundational understanding of how materials science and sensing connect to mechanical applications.</li>
-      </ul>
-      <div class="hero-badges" style="margin-top:1rem;">
-        <span class="badge">LIG SENSORS</span>
-        <span class="badge">RESEARCH</span>
-        <span class="badge">INSTRUMENTATION</span>
-        <span class="badge">TESTING</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="record-entry reveal">
-    <div class="rec-meta">
-      <div class="rec-period">SUMMER 2023</div>
-      <div class="rec-org">PLASP Child Care Services<br/>Peel Region, ON</div>
-    </div>
-    <div>
-      <div class="rec-title">IT Intern</div>
-      <div class="rec-sub">Device Operations — Peel Region Schools</div>
-      <ul class="rec-bullets">
-        <li>Configured and reprogrammed tablets deployed across Peel Region schools and childcare sites.</li>
-        <li>Diagnosed and resolved software and hardware issues; prepared large-scale equipment rollouts.</li>
-        <li>Supported device tracking, data handling, and deployment logistics in a structured environment.</li>
-        <li>Built troubleshooting fundamentals: isolate the fault, test the fix, document what changed.</li>
-      </ul>
-      <div class="hero-badges" style="margin-top:1rem;">
-        <span class="badge">TROUBLESHOOTING</span>
-        <span class="badge">DEVICE CONFIG</span>
-        <span class="badge">IT OPERATIONS</span>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ═══════════ SYSTEMS DIAGNOSTIC ═══════════ -->
 <section id="systems" class="section">
-  <div class="sector-label reveal">SECTOR-04 // ONBOARD SYSTEMS</div>
-  <div class="sector-divider reveal"><h2>SYSTEMS DIAGNOSTIC</h2></div>
+  <div class="sector-label reveal">SECTOR-05 // ONBOARD SYSTEMS</div>
+  <div class="sector-divider reveal"><h2 data-flight-label="SYSTEMS DIAGNOSTIC" data-recruiter-label="TECHNICAL SKILLS">SYSTEMS DIAGNOSTIC</h2></div>
 
   <div class="systems-grid reveal">
     <div class="sys-col">
@@ -1549,8 +2837,8 @@ footer span{color:var(--amber);opacity:.6;}
 
 <!-- ═══════════ ACADEMY LOG ═══════════ -->
 <section id="academy" class="section">
-  <div class="sector-label reveal">SECTOR-05 // ACADEMY LOG</div>
-  <div class="sector-divider reveal"><h2>TRAINING RECORD</h2></div>
+  <div class="sector-label reveal">SECTOR-06 // ACADEMY LOG</div>
+  <div class="sector-divider reveal"><h2 data-flight-label="TRAINING RECORD" data-recruiter-label="EDUCATION">TRAINING RECORD</h2></div>
 
   <div class="academy-grid reveal">
     <div class="academy-card">
@@ -1615,6 +2903,14 @@ footer span{color:var(--amber);opacity:.6;}
       </div>
       <span class="comm-arrow">›</span>
     </a>
+    <a class="comm-link resume-request" href="mailto:harshilj4r@gmail.com?subject=Resume%20Request%20-%20Harshil%20Jadawala">
+      <span class="comm-icon">📄</span>
+      <div class="comm-meta">
+        <div class="comm-type">RESUME // REQUEST COPY</div>
+        <div class="comm-val">Ask for my latest resume</div>
+      </div>
+      <span class="comm-arrow">›</span>
+    </a>
     <div class="comm-link" style="cursor:default;pointer-events:none;">
       <span class="comm-icon">📍</span>
       <div class="comm-meta">
@@ -1637,7 +2933,7 @@ footer span{color:var(--amber);opacity:.6;}
 //  BOOT SEQUENCE
 // ═══════════════════════════════════════════════════════
 const bootLines = [
-  { t:'HJ-1  FLIGHT MANAGEMENT SYSTEM  //  v2.6.1', cls:'b-title', delay:0 },
+  { t:'HJ-1  FLIGHT MANAGEMENT SYSTEM  //  v3.0.0', cls:'b-title', delay:0 },
   { t:'ANTHROPIC AEROSPACE // YORK UNIVERSITY DIVISION', cls:'b-dim', delay:120 },
   { t:'', delay:280 },
   { t:'INITIALIZING SUBSYSTEMS...', delay:400 },
@@ -1646,7 +2942,7 @@ const bootLines = [
   { t:'  ► IMU + GYRO CALIBRATION ........... NOMINAL  ✓', cls:'b-ok', delay:1100, bar:38  },
   { t:'  ► GPS CONSTELLATION LOCK ........... ACQUIRED ✓', cls:'b-ok', delay:1450, bar:54  },
   { t:'  ► SENSOR ARRAY ACTIVATION .......... ONLINE   ✓', cls:'b-ok', delay:1800, bar:68  },
-  { t:'  ► MISSION LOG DATABASE ............. LOADED   ✓', cls:'b-ok', delay:2100, bar:82  },
+  { t:'  ► FLIGHT PLAN + MISSION LOG ........ LOADED   ✓', cls:'b-ok', delay:2100, bar:82  },
   { t:'  ► COMM ARRAY HANDSHAKE ............. READY    ✓', cls:'b-ok', delay:2400, bar:92  },
   { t:'', delay:2600 },
   { t:'  POSITION  :  43.7735°N   79.5019°W   35,000 FT', delay:2800 },
@@ -1663,7 +2959,7 @@ const bootLines = [
   { t:'  ALL SYSTEMS NOMINAL.', cls:'b-success', delay:4700 },
   { t:'  WELCOME BACK, PILOT.', cls:'b-success', delay:4900 },
   { t:'', delay:5100 },
-  { t:'  [ PRESS ANY KEY OR CLICK TO CONTINUE ]', cls:'b-cta', delay:5300 },
+  { t:'  [ CLICK ANYWHERE TO CONTINUE ]', cls:'b-cta', delay:5300 },
 ];
 
 let bootDone = false;
@@ -1678,6 +2974,8 @@ function launchSite() {
   boot.classList.add('fade-out');
   setTimeout(() => { boot.style.display = 'none'; }, 900);
   site.classList.add('visible');
+  document.body.classList.remove('boot-locked');
+  window.dispatchEvent(new CustomEvent('hj:launch'));
 }
 
 bootLines.forEach(({ t, cls, delay, bar: barVal }) => {
@@ -1692,11 +2990,8 @@ bootLines.forEach(({ t, cls, delay, bar: barVal }) => {
   }, delay);
 });
 
-// Auto-launch after all lines + 1.5s
-setTimeout(launchSite, 7000);
-
+// No auto-launch: the cockpit waits for an intentional click.
 document.getElementById('bootSkip').addEventListener('click', launchSite);
-document.addEventListener('keydown', launchSite, { once: true });
 document.getElementById('boot').addEventListener('click', launchSite);
 
 // ═══════════════════════════════════════════════════════
@@ -1722,15 +3017,10 @@ document.getElementById('boot').addEventListener('click', launchSite);
 // ═══════════════════════════════════════════════════════
 //  FAKE TELEMETRY
 // ═══════════════════════════════════════════════════════
-let hdg = 270, alt = 35000;
+let hdg = 270;
 setInterval(() => {
   hdg = (hdg + (Math.random() > .5 ? 1 : -1) + 360) % 360;
-  alt += Math.round((Math.random() - .5) * 20);
-  alt = Math.max(34900, Math.min(35100, alt));
-  const dirs = ['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'];
-  const di = Math.round(hdg / 22.5) % 16;
   document.getElementById('navHdg').textContent = hdg;
-  document.getElementById('navAlt').textContent = alt.toLocaleString();
 }, 2200);
 
 // ═══════════════════════════════════════════════════════
@@ -1779,6 +3069,424 @@ function slideTo(n) {
 function slideNext() { slideTo(slideIdx + 1); }
 function slidePrev() { slideTo(slideIdx - 1); }
 
+
+
+// ═══════════════════════════════════════════════════════
+//  RECRUITER MODE / FLIGHT MODE TOGGLE
+// ═══════════════════════════════════════════════════════
+(function recruiterModeToggle(){
+  const button = document.getElementById('modeToggle');
+  if (!button) return;
+
+  const main = button.querySelector('.mode-toggle-main');
+  const sub = button.querySelector('.mode-toggle-sub');
+  const labelTargets = Array.from(document.querySelectorAll('[data-flight-label][data-recruiter-label]'));
+  const storageKey = 'hj-portfolio-view-mode';
+
+  function setLabels(isRecruiter){
+    labelTargets.forEach(el => {
+      const next = isRecruiter ? el.dataset.recruiterLabel : el.dataset.flightLabel;
+      if (next) el.textContent = next;
+    });
+  }
+
+  function setMode(isRecruiter, persist = true){
+    document.body.classList.toggle('recruiter-mode', isRecruiter);
+    button.setAttribute('aria-pressed', String(isRecruiter));
+    if (main) main.textContent = isRecruiter ? 'FLIGHT MODE' : 'RECRUITER MODE';
+    if (sub) sub.textContent = isRecruiter ? 'restore HUD' : 'clean view';
+    setLabels(isRecruiter);
+
+    const navStatus = document.getElementById('fpStatus');
+    if (navStatus && isRecruiter) navStatus.textContent = 'RECRUITER';
+
+    if (persist) {
+      try { localStorage.setItem(storageKey, isRecruiter ? 'recruiter' : 'flight'); } catch(err) {}
+    }
+
+    // Force scroll-driven UI and active nav to refresh after layout changes.
+    window.dispatchEvent(new Event('scroll'));
+    window.dispatchEvent(new Event('resize'));
+  }
+
+  button.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setMode(!document.body.classList.contains('recruiter-mode'));
+  });
+
+  let saved = 'flight';
+  try { saved = localStorage.getItem(storageKey) || 'flight'; } catch(err) {}
+  setMode(saved === 'recruiter', false);
+})();
+
+// ═══════════════════════════════════════════════════════
+//  SCROLL-LINKED FLIGHT SYSTEMS
+// ═══════════════════════════════════════════════════════
+(function scrollLinkedFlightSystems(){
+  const path = document.getElementById('fpPathProgress');
+  const basePath = document.getElementById('fpPathBase');
+  const plane = document.getElementById('fpPlaneMarker');
+  const status = document.getElementById('fpStatus');
+  const pct = document.getElementById('fpPct');
+  const navAlt = document.getElementById('navAlt');
+  const altTape = document.getElementById('altTape');
+  const altFill = document.getElementById('altTapeFill');
+  const speedTape = document.getElementById('speedTape');
+  const missionPanels = document.querySelectorAll('.mission-featured');
+  const missionCards = document.querySelectorAll('.mission-card');
+  const allSections = Array.from(document.querySelectorAll('section[id]'));
+
+  if (!path || !basePath || !plane) return;
+
+  const len = path.getTotalLength();
+  path.style.strokeDasharray = len;
+  path.style.strokeDashoffset = len;
+
+  let lastY = window.scrollY;
+  function clamp(v,min,max){ return Math.max(min, Math.min(max, v)); }
+
+  function activeSectionLabel(){
+    let cur = 'cockpit';
+    allSections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 140) cur = s.id;
+    });
+    return ({
+      cockpit:'TAKEOFF',
+      about:'BRIEFING',
+      record:'LOGBOOK',
+      current:'ACTIVE OPS',
+      missions:'MISSION RUN',
+      systems:'SYSTEMS',
+      academy:'ACADEMY',
+      comms:'LANDING'
+    })[cur] || 'CRUISE';
+  }
+
+  function updateProjectDrift(){
+    const vh = window.innerHeight || 1;
+    missionPanels.forEach((card) => {
+      const r = card.getBoundingClientRect();
+      const offset = ((r.top + r.height / 2) - vh / 2) / vh;
+      const y = clamp(-offset * 34, -18, 18);
+      const yaw = clamp(-offset * 1.8, -1.2, 1.2);
+      const z = clamp(offset * .65, -.55, .55);
+      card.style.setProperty('--drift-y', y.toFixed(2) + 'px');
+      card.style.setProperty('--drift-yaw', yaw.toFixed(2) + 'deg');
+      card.style.setProperty('--drift-z', z.toFixed(2) + 'deg');
+    });
+    missionCards.forEach((card) => {
+      const r = card.getBoundingClientRect();
+      const offset = ((r.top + r.height / 2) - vh / 2) / vh;
+      card.style.setProperty('--card-drift', clamp(-offset * 18, -10, 10).toFixed(2) + 'px');
+    });
+  }
+
+  function update(){
+    const max = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+    const p = clamp(window.scrollY / max, 0, 1);
+    const dir = window.scrollY >= lastY ? 1 : -1;
+    lastY = window.scrollY;
+
+    path.style.strokeDashoffset = len * (1 - p);
+
+    const point = basePath.getPointAtLength(len * p);
+    const leadPoint = basePath.getPointAtLength(clamp(len * p + (dir * 12), 0, len));
+    const angle = Math.atan2(leadPoint.y - point.y, leadPoint.x - point.x) * 180 / Math.PI + 90;
+    const bank = dir > 0 ? -10 : 10;
+    plane.setAttribute('transform', `translate(${point.x} ${point.y}) rotate(${angle + bank})`);
+
+    const altitude = Math.round(1200 + Math.sin(p * Math.PI) * 33800);
+    const speed = Math.round(120 + Math.sin(p * Math.PI) * 360);
+    if (navAlt) navAlt.textContent = altitude.toLocaleString();
+    if (altTape) altTape.textContent = altitude >= 10000 ? Math.round(altitude / 1000) + 'K' : Math.max(1, Math.round(altitude / 1000)) + 'K';
+    if (altFill) altFill.style.height = clamp((altitude / 35000) * 100, 8, 96).toFixed(1) + '%';
+    if (speedTape) speedTape.textContent = speed;
+
+    status.textContent = activeSectionLabel();
+    pct.textContent = String(Math.round(p * 100)).padStart(3,'0') + '%';
+    updateProjectDrift();
+  }
+
+  update();
+  window.addEventListener('scroll', update, { passive:true });
+  window.addEventListener('resize', update);
+})();
+
+// ═══════════════════════════════════════════════════════
+//  DRAGGABLE FLIGHT PLAN SCROLL CONTROL
+// ═══════════════════════════════════════════════════════
+(function draggableFlightPlan(){
+  const sidebar = document.querySelector('.flight-plan-sidebar');
+  const map = document.querySelector('.fp-map');
+  if (!sidebar || !map) return;
+
+  const clamp = (v,min,max) => Math.max(min, Math.min(max, v));
+  let dragging = false;
+
+  function progressFromPointer(e){
+    const rect = map.getBoundingClientRect();
+    return clamp((e.clientY - rect.top) / Math.max(1, rect.height), 0, 1);
+  }
+
+  function scrollToProgress(progress){
+    const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+    window.scrollTo({ top: progress * maxScroll, behavior: 'auto' });
+  }
+
+  function jump(e){
+    if (document.body.classList.contains('recruiter-mode')) return;
+    e.preventDefault();
+    scrollToProgress(progressFromPointer(e));
+  }
+
+  sidebar.addEventListener('pointerdown', (e) => {
+    if (document.body.classList.contains('recruiter-mode')) return;
+    dragging = true;
+    sidebar.classList.add('dragging');
+    sidebar.setPointerCapture?.(e.pointerId);
+    jump(e);
+  });
+
+  sidebar.addEventListener('pointermove', (e) => {
+    if (!dragging) return;
+    jump(e);
+  });
+
+  function endDrag(e){
+    if (!dragging) return;
+    dragging = false;
+    sidebar.classList.remove('dragging');
+    try { sidebar.releasePointerCapture?.(e.pointerId); } catch(err) {}
+  }
+
+  sidebar.addEventListener('pointerup', endDrag);
+  sidebar.addEventListener('pointercancel', endDrag);
+  sidebar.addEventListener('lostpointercapture', () => {
+    dragging = false;
+    sidebar.classList.remove('dragging');
+  });
+})();
+
+// ═══════════════════════════════════════════════════════
+//  RADAR REACTION TO MOUSE
+// ═══════════════════════════════════════════════════════
+(function radarMouseReaction(){
+  const cockpit = document.getElementById('cockpit');
+  const radar = document.querySelector('.radar-bg');
+  if (!cockpit || !radar) return;
+
+  cockpit.addEventListener('mousemove', (e) => {
+    const r = cockpit.getBoundingClientRect();
+    const x = (e.clientX - r.left) / Math.max(1, r.width);
+    const y = (e.clientY - r.top) / Math.max(1, r.height);
+    const dx = (x - .5) * 34;
+    const dy = (y - .5) * 28;
+    radar.style.transform = `translate(calc(-50% + ${dx.toFixed(1)}px), calc(-50% + ${dy.toFixed(1)}px)) scale(${(1 + (x - .5) * .025).toFixed(3)})`;
+    cockpit.style.setProperty('--radar-hot-x', (x * 100).toFixed(1) + '%');
+    cockpit.style.setProperty('--radar-hot-y', (y * 100).toFixed(1) + '%');
+  });
+
+  cockpit.addEventListener('mouseleave', () => {
+    radar.style.transform = 'translate(-50%,-50%) scale(1)';
+    cockpit.style.setProperty('--radar-hot-x', '55%');
+    cockpit.style.setProperty('--radar-hot-y', '50%');
+  });
+})();
+
+
+
+// ═══════════════════════════════════════════════════════
+//  FINAL APPROACH UPGRADE: ICONS, OUTCOMES, NOTES, GLITCH
+// ═══════════════════════════════════════════════════════
+(function finalApproachUpgrade(){
+  const icons = {
+    sensor:`<svg viewBox="0 0 24 24"><path d="M12 3v4M12 17v4M3 12h4M17 12h4"/><circle cx="12" cy="12" r="4"/><path d="M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M18.4 5.6l-2.8 2.8M8.4 15.6l-2.8 2.8"/></svg>`,
+    aircraft:`<svg viewBox="0 0 24 24"><path d="M2 16l20-9-9 20-2-9-9-2z"/><path d="M11 18l4-7"/></svg>`,
+    tools:`<svg viewBox="0 0 24 24"><path d="M14 7l3 3M5 19l8.5-8.5M13 4l7 7-3 3-7-7z"/><path d="M6 15l3 3"/></svg>`,
+    chart:`<svg viewBox="0 0 24 24"><path d="M4 19V5"/><path d="M4 19h16"/><path d="M7 15l3-4 3 2 5-7"/></svg>`,
+    reef:`<svg viewBox="0 0 24 24"><path d="M12 21V9"/><path d="M12 12c-4-1-6-4-5-8 4 1 6 4 5 8z"/><path d="M12 14c4-1 6-4 5-8-4 1-6 4-5 8z"/><path d="M8 21h8"/></svg>`,
+    target:`<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg>`,
+    antenna:`<svg viewBox="0 0 24 24"><path d="M12 20V10"/><path d="M7 21h10"/><path d="M8 7a5 5 0 0 1 8 0"/><path d="M5 4a9 9 0 0 1 14 0"/><circle cx="12" cy="10" r="2"/></svg>`,
+    phone:`<svg viewBox="0 0 24 24"><path d="M7 3h10a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/><path d="M10 18h4"/></svg>`,
+    satellite:`<svg viewBox="0 0 24 24"><path d="M10 14l-4 4"/><path d="M14 10l4-4"/><rect x="8" y="8" width="8" height="8" rx="1" transform="rotate(45 12 12)"/><path d="M3 21l5-1-4-4-1 5zM21 3l-5 1 4 4 1-5z"/></svg>`,
+    document:`<svg viewBox="0 0 24 24"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h6"/></svg>`,
+    location:`<svg viewBox="0 0 24 24"><path d="M12 21s6-5.5 6-11a6 6 0 0 0-12 0c0 5.5 6 11 6 11z"/><circle cx="12" cy="10" r="2"/></svg>`
+  };
+  const setIcon = (el, key) => {
+    if (!el || !icons[key]) return;
+    el.classList.add('system-icon');
+    el.innerHTML = icons[key];
+  };
+
+  document.querySelectorAll('.interest-card').forEach(card => {
+    const title = card.querySelector('.interest-title')?.textContent || '';
+    const icon = card.querySelector('.interest-icon');
+    if (/LIG/i.test(title)) setIcon(icon,'sensor');
+    else if (/FLIGHT/i.test(title)) setIcon(icon,'aircraft');
+    else if (/PROTOTYPING/i.test(title)) setIcon(icon,'tools');
+    else setIcon(icon,'chart');
+  });
+  document.querySelectorAll('.mission-card').forEach(card => {
+    const title = card.querySelector('.mc-title')?.textContent || '';
+    const icon = card.querySelector('.mc-icon');
+    setIcon(icon, /TURRET|TARGET/i.test(title) ? 'target' : 'reef');
+  });
+  const commKeys = ['antenna','phone','satellite','document','location'];
+  document.querySelectorAll('.comm-icon').forEach((icon, i) => setIcon(icon, commKeys[i] || 'antenna'));
+
+  const outcomeData = [
+    {
+      match:'IRRIGATION CONTROL SYSTEM',
+      items:[['CONTROL LOOP','Sensor feedback drove pump activation'],['SAFETY','Emergency stop + state-machine logic'],['CALIBRATION','Dry/wet thresholds mapped to moisture'],['OUTPUT','Repeatable automated watering cycles']]
+    },
+    {
+      match:'AIRFRAME-01 BUILD + FLIGHT LOG',
+      items:[['FLIGHT TEST','Built and tested a flyable aircraft'],['STABILITY','CG and battery placement tuned'],['INTEGRATION','Motors, wiring, PCB, airframe combined'],['RESULT','Real physical feedback guided revisions']]
+    },
+    {
+      match:'ACOUSTIC MAPPING + OCCUPANCY SYSTEM',
+      items:[['SIGNAL','Sound readings classified into room states'],['FIELD TEST','Tested in York study spaces'],['UX','Student problem framed around live availability'],['NEXT','Backend + live status infrastructure']]
+    }
+  ];
+  document.querySelectorAll('.mission-featured').forEach(card => {
+    const title = card.querySelector('.mission-name')?.textContent?.trim() || '';
+    const found = outcomeData.find(o => title.includes(o.match));
+    const info = card.querySelector('.mission-info');
+    if (!found || !info || info.querySelector('.mission-outcomes')) return;
+    const wrap = document.createElement('div');
+    wrap.className = 'mission-outcomes';
+    wrap.innerHTML = found.items.map(([k,v]) => `<div class="outcome-card"><div class="outcome-k">${k}</div><div class="outcome-v">${v}</div></div>`).join('');
+    const notesAnchor = info.querySelector('.mission-systems');
+    info.insertBefore(wrap, notesAnchor || null);
+  });
+  document.querySelectorAll('.mission-card').forEach(card => {
+    const title = card.querySelector('.mc-title')?.textContent || '';
+    if (card.querySelector('.compact-outcomes')) return;
+    const wrap = document.createElement('div');
+    wrap.className = 'compact-outcomes';
+    wrap.innerHTML = /TURRET|TARGET/i.test(title)
+      ? `<span><strong>OUTPUT</strong> Vision-to-servo tracking loop</span><span><strong>CHALLENGE</strong> Latency and jitter reduction</span>`
+      : `<span><strong>RESULT</strong> UNHack 2nd place overall</span><span><strong>FOCUS</strong> AI-assisted reef disease detection</span>`;
+    const tags = card.querySelector('.mc-tags');
+    card.insertBefore(wrap, tags || null);
+  });
+
+  const notes = {
+    irrigation:[
+      {title:'Sensor Calibration', sub:'IRRIGATION CONTROL SYSTEM', body:'The moisture sensor readings were not useful until dry and wet reference values were mapped into a practical range. The system became more reliable after treating calibration as part of the design, not as an afterthought.'},
+      {title:'Pump Switching', sub:'IRRIGATION CONTROL SYSTEM', body:'The pump could not be treated like a tiny LED load. A MOSFET driver separated the low-current control signal from the higher-current actuator side, making the system safer and more realistic.'}
+    ],
+    airframe:[
+      {title:'Center of Gravity Shift', sub:'AIRFRAME-01', body:'During testing, the aircraft behavior was strongly tied to mass placement. Battery position and internal routing were treated as flight-critical design variables because small CG shifts changed stability quickly.'},
+      {title:'Wiring as Structure', sub:'AIRFRAME-01', body:'The wiring was not just an electrical task. Routing affected access, balance, repairability, and how cleanly the airframe could close, so the layout became part of the mechanical design.'}
+    ],
+    noise:[
+      {title:'Threshold Tuning', sub:'ACOUSTIC MAPPING SYSTEM', body:'Raw sound values were too jumpy for a useful user experience. The system needed smoothing and state thresholds so it could report room conditions instead of noisy sensor numbers.'},
+      {title:'Field Conditions', sub:'ACOUSTIC MAPPING SYSTEM', body:'Testing in actual study spaces changed the design assumptions. Background noise, crowd flow, and room layout mattered more than a clean bench test, so the classification logic had to be grounded in real conditions.'}
+    ]
+  };
+  const noteKeys = ['irrigation','airframe','noise'];
+  document.querySelectorAll('.mission-featured').forEach((card, idx) => {
+    const key = noteKeys[idx];
+    const info = card.querySelector('.mission-info');
+    if (!key || !info || info.querySelector('.engineering-notes')) return;
+    const box = document.createElement('div');
+    box.className = 'engineering-notes';
+    box.innerHTML = `<div class="notes-topline"><span class="notes-label">ENGINEERING NOTES</span></div><div class="note-buttons">${notes[key].map((note, i)=>`<button class="note-btn" type="button" data-note-key="${key}" data-note-index="${i}">VIEW NOTE ${String(i+1).padStart(2,'0')}</button>`).join('')}</div>`;
+    const systems = info.querySelector('.mission-systems');
+    info.insertBefore(box, systems || null);
+  });
+
+  const modal = document.getElementById('noteModal');
+  const noteTitle = document.getElementById('noteTitle');
+  const noteSubtitle = document.getElementById('noteSubtitle');
+  const noteBody = document.getElementById('noteBody');
+  const noteClose = document.getElementById('noteClose');
+  function openNote(note){
+    if (!modal || !note) return;
+    noteTitle.textContent = note.title;
+    noteSubtitle.textContent = note.sub;
+    noteBody.innerHTML = note.body.replace(/(calibration|MOSFET|Center of Gravity|CG|wiring|smoothing|thresholds|field)/gi, '<strong>$1</strong>');
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden','false');
+    noteClose?.focus();
+  }
+  function closeNote(){
+    if (!modal) return;
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden','true');
+  }
+  document.addEventListener('click', e => {
+    const btn = e.target.closest('.note-btn');
+    if (!btn) return;
+    const note = notes[btn.dataset.noteKey]?.[Number(btn.dataset.noteIndex || 0)];
+    openNote(note);
+  });
+  noteClose?.addEventListener('click', closeNote);
+  modal?.addEventListener('click', e => { if (e.target === modal) closeNote(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeNote(); });
+})();
+
+// ═══════════════════════════════════════════════════════
+//  MOUSE DEPTH LAYERING
+// ═══════════════════════════════════════════════════════
+(function cockpitMouseDepth(){
+  const cockpit = document.getElementById('cockpit');
+  const airframe = document.querySelector('.airframe-project');
+  if (cockpit) {
+    cockpit.addEventListener('mousemove', e => {
+      if (document.body.classList.contains('recruiter-mode')) return;
+      const r = cockpit.getBoundingClientRect();
+      const x = ((e.clientX - r.left) / Math.max(1,r.width) - .5) * 2;
+      const y = ((e.clientY - r.top) / Math.max(1,r.height) - .5) * 2;
+      cockpit.style.setProperty('--mx', x.toFixed(3));
+      cockpit.style.setProperty('--my', y.toFixed(3));
+    });
+    cockpit.addEventListener('mouseleave', () => {
+      cockpit.style.setProperty('--mx', '0');
+      cockpit.style.setProperty('--my', '0');
+    });
+  }
+  if (airframe) {
+    airframe.addEventListener('pointermove', e => {
+      const r = airframe.getBoundingClientRect();
+      const x = ((e.clientX - r.left) / Math.max(1,r.width) - .5) * 2;
+      const y = ((e.clientY - r.top) / Math.max(1,r.height) - .5) * 2;
+      airframe.style.setProperty('--bp-x', x.toFixed(3));
+      airframe.style.setProperty('--bp-y', y.toFixed(3));
+    });
+    airframe.addEventListener('pointerleave', () => {
+      airframe.style.setProperty('--bp-x','0');
+      airframe.style.setProperty('--bp-y','0');
+    });
+  }
+})();
+
+// ═══════════════════════════════════════════════════════
+//  RARE SYSTEM INTERRUPTION EASTER EGG
+// ═══════════════════════════════════════════════════════
+(function tinySystemInterruption(){
+  const alert = document.getElementById('systemAlert');
+  let armed = false;
+  function trigger(){
+    if (armed || document.body.classList.contains('recruiter-mode')) return;
+    armed = true;
+    document.body.classList.add('system-glitch');
+    alert?.classList.add('show');
+    setTimeout(() => {
+      document.body.classList.remove('system-glitch');
+      alert?.classList.remove('show');
+    }, 720);
+  }
+  function schedule(){
+    const delay = 28000 + Math.random() * 22000;
+    setTimeout(trigger, delay);
+  }
+  window.addEventListener('hj:launch', schedule, {once:true});
+  if (document.getElementById('site')?.classList.contains('visible')) schedule();
+})();
+
 // ═══════════════════════════════════════════════════════
 //  FOOTER YEAR
 // ═══════════════════════════════════════════════════════
@@ -1786,4 +3494,3 @@ document.getElementById('footYear').textContent = new Date().getFullYear();
 </script>
 </body>
 </html>
-HTMLEOF
