@@ -2182,6 +2182,25 @@ body.recruiter-mode .mission-featured{margin-bottom:22px!important;}
 @media(max-width:1100px){.record-entry{max-width:100%;}.service-airframe-ghost{opacity:.08;right:1vw;}}
 @media(max-width:860px){.service-airframe-ghost,#missions::after,#missions .sector-divider::before{display:none;}.record-entry{max-width:100%;}}
 
+
+
+/* Mobile stability patch: keeps the same look, but prevents mobile browser scroll restoration and heavy hidden layers from causing errors. */
+@media(max-width:860px){
+  html, body{
+    overscroll-behavior-y:none;
+  }
+  .wireframe-aircraft,
+  .service-airframe-ghost,
+  .mission-section-ghost,
+  .ambient-blip{
+    animation:none!important;
+  }
+  .footage-inner iframe,
+  .slide iframe{
+    max-width:100%;
+  }
+}
+
 </style>
 </head>
 <body class="boot-locked">
@@ -2665,10 +2684,10 @@ body.recruiter-mode .mission-featured{margin-bottom:22px!important;}
       <div class="footage-wrap">
         <div class="footage-label">MISSION FOOTAGE // LIVE DEMONSTRATION</div>
         <div class="footage-inner">
-          <iframe src="https://www.youtube.com/embed/Ik2zGVtEsoc?rel=0&modestbranding=1"
+          <iframe src="https://www.youtube.com/embed/Ik2zGVtEsoc?rel=0&modestbranding=1&origin=https%3A%2F%2Fharshilj4.github.io"
             title="Automatic Plant Watering System demo"
-            allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"
-            allowfullscreen loading="lazy"></iframe>
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
         </div>
       </div>
       <div class="mission-info">
@@ -2744,10 +2763,10 @@ body.recruiter-mode .mission-featured{margin-bottom:22px!important;}
             <div class="slide-cap">AIRFRAME DESIGN MAP // SYSTEM LAYOUT</div>
           </div>
           <div class="slide">
-            <iframe src="https://www.youtube.com/embed/L-_7fKUDGoE?rel=0&modestbranding=1"
+            <iframe src="https://www.youtube.com/embed/L-_7fKUDGoE?rel=0&modestbranding=1&origin=https%3A%2F%2Fharshilj4.github.io"
               title="RC Airplane flight footage"
-              allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"
-              allowfullscreen loading="lazy"></iframe>
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
             <div class="slide-cap">▶ FLIGHT FOOTAGE // AIRFRAME-01</div>
           </div>
           <div class="slide">
@@ -2886,10 +2905,10 @@ body.recruiter-mode .mission-featured{margin-bottom:22px!important;}
       <div class="footage-wrap">
         <div class="footage-label">MISSION FOOTAGE // ROOM SENSOR TEST</div>
         <div class="footage-inner">
-          <iframe src="https://www.youtube.com/embed/03TQ7miFJfc?rel=0&modestbranding=1"
+          <iframe src="https://www.youtube.com/embed/03TQ7miFJfc?rel=0&modestbranding=1&origin=https%3A%2F%2Fharshilj4.github.io"
             title="Noise Tracker sensor test"
-            allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"
-            allowfullscreen loading="lazy"></iframe>
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
         </div>
       </div>
       <div class="mission-info">
@@ -3118,6 +3137,47 @@ body.recruiter-mode .mission-featured{margin-bottom:22px!important;}
 </div><!-- /site -->
 
 <script>
+// Mobile/load stability patch. No visual changes, only startup and browser safety.
+(function hjMobileStartupStability(){
+  try {
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  } catch(err) {}
+
+  const shouldForceTop = !sessionStorage.getItem('hj-user-navigated');
+
+  function clearIncomingHash(){
+    if (location.hash && shouldForceTop) {
+      try { history.replaceState(null, document.title, location.pathname + location.search); } catch(err) {}
+    }
+  }
+
+  function forceCockpitTop(){
+    if (!shouldForceTop) return;
+    const cockpit = document.getElementById('cockpit');
+    if (!cockpit) return;
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  }
+
+  clearIncomingHash();
+  window.addEventListener('pageshow', () => { clearIncomingHash(); forceCockpitTop(); }, { once:true });
+  document.addEventListener('DOMContentLoaded', () => { clearIncomingHash(); forceCockpitTop(); });
+  window.addEventListener('load', () => {
+    clearIncomingHash();
+    forceCockpitTop();
+    setTimeout(forceCockpitTop, 80);
+    setTimeout(forceCockpitTop, 420);
+  }, { once:true });
+
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest && e.target.closest('a[href^="#"]');
+    if (a) {
+      try { sessionStorage.setItem('hj-user-navigated','1'); } catch(err) {}
+    }
+  }, { capture:true });
+})();
+
 // ═══════════════════════════════════════════════════════
 //  BOOT SEQUENCE
 // ═══════════════════════════════════════════════════════
@@ -3164,6 +3224,16 @@ function launchSite() {
   setTimeout(() => { boot.style.display = 'none'; }, 900);
   site.classList.add('visible');
   document.body.classList.remove('boot-locked');
+  requestAnimationFrame(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  });
+  setTimeout(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  }, 120);
   window.dispatchEvent(new CustomEvent('hj:launch'));
 }
 
@@ -3180,14 +3250,15 @@ bootLines.forEach(({ t, cls, delay, bar: barVal }) => {
 });
 
 // No auto-launch: the cockpit waits for an intentional click.
-document.getElementById('bootSkip').addEventListener('click', launchSite);
-document.getElementById('boot').addEventListener('click', launchSite);
+document.getElementById('bootSkip')?.addEventListener('click', launchSite);
+document.getElementById('boot')?.addEventListener('click', launchSite);
 
 // ═══════════════════════════════════════════════════════
 //  HEADING TAPE
 // ═══════════════════════════════════════════════════════
 (function buildHdgTape() {
   const tape = document.getElementById('hdgTape');
+  if (!tape) return;
   const dirs = { 0:'N', 90:'E', 180:'S', 270:'W', 360:'N' };
   let html = '';
   // Build two full cycles so the CSS animation loops seamlessly
@@ -3209,7 +3280,8 @@ document.getElementById('boot').addEventListener('click', launchSite);
 let hdg = 270;
 setInterval(() => {
   hdg = (hdg + (Math.random() > .5 ? 1 : -1) + 360) % 360;
-  document.getElementById('navHdg').textContent = hdg;
+  const navHdgEl = document.getElementById('navHdg');
+  if (navHdgEl) navHdgEl.textContent = hdg;
 }, 2200);
 
 // ═══════════════════════════════════════════════════════
@@ -3246,14 +3318,16 @@ const slides = document.querySelectorAll('#planeSlideshow .slide');
 const dots   = document.querySelectorAll('#slideDots .sdot');
 
 function slideTo(n) {
-  // reset YouTube iframe if leaving video slide
-  const curFrame = slides[slideIdx].querySelector('iframe');
+  if (!slides.length) return;
+  const currentSlide = slides[slideIdx];
+  const currentDot = dots[slideIdx];
+  const curFrame = currentSlide?.querySelector('iframe');
   if (curFrame) { const s = curFrame.src; curFrame.src = ''; curFrame.src = s; }
-  slides[slideIdx].classList.remove('active');
-  dots[slideIdx].classList.remove('active');
+  currentSlide?.classList.remove('active');
+  currentDot?.classList.remove('active');
   slideIdx = (n + slides.length) % slides.length;
-  slides[slideIdx].classList.add('active');
-  dots[slideIdx].classList.add('active');
+  slides[slideIdx]?.classList.add('active');
+  dots[slideIdx]?.classList.add('active');
 }
 function slideNext() { slideTo(slideIdx + 1); }
 function slidePrev() { slideTo(slideIdx - 1); }
@@ -3679,7 +3753,8 @@ function slidePrev() { slideTo(slideIdx - 1); }
 // ═══════════════════════════════════════════════════════
 //  FOOTER YEAR
 // ═══════════════════════════════════════════════════════
-document.getElementById('footYear').textContent = new Date().getFullYear();
+const footYearEl = document.getElementById('footYear');
+if (footYearEl) footYearEl.textContent = new Date().getFullYear();
 </script>
 </body>
 </html>
