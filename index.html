@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>HJ-1 // HARDWARE + FLIGHT SYSTEMS — HARSHIL JADAWALA</title>
-<meta name="description" content="Harshil Jadawala — Mechanical Engineering at York University. Hardware, sensors, aviation, and prototype engineering portfolio."/>
+<title>HJ-1 // HARDWARE + FLIGHT SYSTEMS - HARSHIL JADAWALA</title>
+<meta name="description" content="Harshil Jadawala - Mechanical Engineering at York University. Hardware, sensors, aviation, and prototype engineering portfolio."/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Share+Tech+Mono&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
@@ -787,7 +787,7 @@ nav{
   padding-left:1.2rem;position:relative;
 }
 .rec-bullets li::before{
-  content:'—';position:absolute;left:0;
+  content:'-';position:absolute;left:0;
   color:var(--muted);
 }
 
@@ -2036,6 +2036,152 @@ body.recruiter-mode .telemetry-group strong{color:var(--green);}
   .mission-outcomes{grid-template-columns:1fr;}
 }
 
+
+
+/* FINAL PATCH FROM STABLE VERSION: readability, density, background, service visual */
+body::after{
+  content:'';
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:-1;
+  background:
+    linear-gradient(90deg, rgba(56,200,232,.035) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(232,160,32,.025) 1px, transparent 1px),
+    radial-gradient(circle at 18% 42%, rgba(56,200,232,.05), transparent 28%),
+    radial-gradient(circle at 76% 35%, rgba(255,204,68,.04), transparent 32%);
+  background-size:96px 96px,96px 96px,auto,auto;
+  opacity:.55;
+}
+.section::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:linear-gradient(115deg, transparent 0 44%, rgba(255,255,255,.025) 45%, transparent 46% 100%);
+  opacity:.35;
+}
+#record{overflow:hidden;}
+.service-airframe-ghost{
+  position:absolute;
+  right:5vw;
+  top:120px;
+  width:min(36vw,560px);
+  opacity:.16;
+  pointer-events:none;
+  filter:drop-shadow(0 0 26px rgba(255,204,68,.16));
+  animation:service-float 8s ease-in-out infinite;
+}
+.service-airframe-ghost svg{width:100%;height:auto;display:block;}
+.saf-main,.saf-line,.saf-dash{fill:none;stroke:rgba(255,204,68,.85);stroke-width:1.5;vector-effect:non-scaling-stroke;}
+.saf-line{stroke:rgba(56,200,232,.65);}
+.saf-dash{stroke:rgba(40,224,130,.6);stroke-dasharray:8 9;}
+.saf-dot{fill:rgba(255,204,68,.9);}
+.service-airframe-ghost span{display:block;margin-top:.5rem;font-family:var(--font-m);font-size:.58rem;letter-spacing:.18em;color:var(--amber-b);text-align:right;}
+@keyframes service-float{0%,100%{transform:translateY(0) rotate(-1deg);}50%{transform:translateY(14px) rotate(1deg);}}
+.record-entry{max-width:72%;}
+.academy-card{transition:background .2s ease,border-color .2s ease,transform .2s ease;}
+.academy-card:hover{transform:translateY(-2px);border-color:rgba(255,204,68,.28);}
+.academy-primary-card,
+.academy-primary-card:hover{
+  background:linear-gradient(135deg, rgba(232,160,32,.16), rgba(6,10,18,.94))!important;
+  color:var(--text)!important;
+}
+.academy-primary-card .ac-degree{color:var(--amber-b)!important;}
+.academy-primary-card .ac-school{color:var(--cyan)!important;}
+.training-details summary{
+  display:inline-flex;
+  align-items:center;
+  gap:.4rem;
+  padding:.55rem .75rem;
+  border:1px solid rgba(255,204,68,.34);
+  color:var(--amber-b);
+  background:rgba(3,5,10,.5);
+  cursor:pointer;
+  font-family:var(--font-m);
+  font-size:.62rem;
+  letter-spacing:.15em;
+  list-style:none;
+}
+.training-details summary::-webkit-details-marker{display:none;}
+.training-details[open] summary{color:var(--green);border-color:rgba(40,224,130,.42);}
+.training-details .ac-body{margin-top:1rem;color:#cfc1a0!important;}
+.training-badges .badge,
+.academy-primary-card .badge{
+  border-color:rgba(255,204,68,.36)!important;
+  color:var(--amber-b)!important;
+  background:rgba(3,5,10,.54)!important;
+}
+.mission-body{align-items:start;}
+.footage-wrap{height:auto;align-self:start;}
+.mission-info{align-self:start;}
+.footage-inner,.slideshow{max-height:620px;}
+.mission-featured{margin-bottom:48px!important;}
+.info-brief{font-size:.83rem;line-height:1.58;}
+.mission-logs li,.rec-bullets li{font-size:.78rem;line-height:1.52;}
+.mc-desc,.about-copy,.current-copy{line-height:1.58;}
+.ops-checklist-compact li{padding:.62rem .78rem;font-size:.69rem;}
+.current-console{min-height:0;}
+.current-title{font-size:clamp(1.45rem,2.4vw,2.15rem);}
+.airframe-project .airframe-blueprint{display:none!important;}
+.blueprint-slide{background:#020810;}
+.blueprint-slide .blueprint-status{top:14px;left:14px;}
+.blueprint-slide .blueprint-svg{width:100%;height:100%;}
+.bp-callout.show{opacity:1;transform:none;}
+.blueprint-slide.active .bp-draw{stroke-dasharray:900;stroke-dashoffset:900;animation:bp-map-draw 2.4s ease forwards;}
+@keyframes bp-map-draw{to{stroke-dashoffset:0;}}
+body.recruiter-mode #current .ops-stack,
+body.recruiter-mode .mission-logs,
+body.recruiter-mode .engineering-notes,
+body.recruiter-mode .mission-systems,
+body.recruiter-mode .mission-outcomes,
+body.recruiter-mode .service-airframe-ghost,
+body.recruiter-mode .live-telemetry,
+body.recruiter-mode .wireframe-aircraft{display:none!important;}
+body.recruiter-mode .current-ops-grid{grid-template-columns:1fr;max-width:920px;}
+body.recruiter-mode .current-console{padding:1.4rem;min-height:0;}
+body.recruiter-mode .mission-body{grid-template-columns:1fr!important;}
+body.recruiter-mode .footage-wrap{display:none!important;}
+body.recruiter-mode .mission-info{gap:.75rem;padding:1rem 1.15rem;}
+body.recruiter-mode .info-brief{font-size:.82rem;line-height:1.5;}
+body.recruiter-mode .recruiter-summary{display:block;padding:.75rem;}
+body.recruiter-mode .mission-featured{margin-bottom:22px!important;}
+.ambient-blip{
+  position:absolute;
+  width:5px;height:5px;border-radius:50%;
+  background:var(--green);
+  box-shadow:0 0 14px rgba(40,224,130,.8);
+  opacity:.55;
+  animation:blip-run 7s linear infinite;
+}
+@keyframes blip-run{0%{transform:translateX(-20vw);opacity:0;}10%{opacity:.7;}85%{opacity:.5;}100%{transform:translateX(105vw);opacity:0;}}
+#missions::after{
+  content:'';
+  position:absolute;
+  left:5vw;
+  top:135px;
+  width:220px;
+  height:78%;
+  pointer-events:none;
+  opacity:.28;
+  background:
+    linear-gradient(var(--amber),var(--amber)) 24px 0/1px 100% no-repeat,
+    radial-gradient(circle,var(--amber-b) 0 3px,transparent 4px) 20px 8px/40px 150px repeat-y;
+  filter:drop-shadow(0 0 8px rgba(255,204,68,.22));
+}
+#missions .sector-divider::before{
+  content:'MISSION INDEX';
+  position:absolute;
+  left:0;
+  top:4.5rem;
+  font-family:var(--font-m);
+  font-size:.56rem;
+  letter-spacing:.18em;
+  color:rgba(255,204,68,.5);
+}
+@media(max-width:1100px){.record-entry{max-width:100%;}.service-airframe-ghost{opacity:.08;right:1vw;}}
+@media(max-width:860px){.service-airframe-ghost,#missions::after,#missions .sector-divider::before{display:none;}.record-entry{max-width:100%;}}
+
 </style>
 </head>
 <body class="boot-locked">
@@ -2193,7 +2339,7 @@ body.recruiter-mode .telemetry-group strong{color:var(--green);}
 
     <!-- Pilot info -->
     <div class="hero-center">
-      <div class="hero-kicker reveal">PILOT PROFILE // ACTIVE CLEARANCE // YORK UNIVERSITY</div>
+      <div class="hero-kicker reveal">PILOT PROFILE // ACTIVE CLEARANCE</div>
       <h1 class="hero-callsign reveal" aria-label="Harshil Jadawala">
         <span class="callsign-first">HARSHIL</span>
         <span class="callsign-last">JADAWALA</span>
@@ -2206,12 +2352,12 @@ body.recruiter-mode .telemetry-group strong{color:var(--green);}
         <span>YORK UNIVERSITY</span>
       </div>
       <p class="hero-bio reveal">
-        I build things that have to work in the real world — sensors, circuits, airframes, and systems. Not on slides. On the bench, in the lab, and in the air.
+        I build things that have to work in the real world - sensors, circuits, airframes, and systems. Not on slides. On the bench, in the lab, and in the air.
       </p>
       <div class="hero-params reveal">
         <div class="param">
           <span class="param-k">STATUS</span>
-          <span class="param-v green">● ACTIVE — LIG SENSOR RESEARCH</span>
+          <span class="param-v green">● ACTIVE - LIG SENSOR RESEARCH</span>
         </div>
         <div class="param">
           <span class="param-k">POSITION</span>
@@ -2392,15 +2538,24 @@ body.recruiter-mode .telemetry-group strong{color:var(--green);}
 <section id="record" class="section">
   <div class="sector-label reveal">SECTOR-02 // FLIGHT RECORD</div>
   <div class="sector-divider reveal"><h2 data-flight-label="SERVICE HISTORY" data-recruiter-label="WORK EXPERIENCE">SERVICE HISTORY</h2></div>
+  <div class="service-airframe-ghost" aria-hidden="true">
+    <svg viewBox="0 0 520 300">
+      <path class="saf-main" d="M34 154 L250 86 L488 154 L250 222 Z"/>
+      <path class="saf-line" d="M250 86 L250 222 M82 154 H442 M178 121 H318 M178 187 H318"/>
+      <path class="saf-dash" d="M210 154 C236 130 282 130 312 154 C280 178 236 178 210 154"/>
+      <circle class="saf-dot" cx="205" cy="150" r="5"/><circle class="saf-dot" cx="315" cy="150" r="5"/>
+    </svg>
+    <span>AIRFRAME WORKFLOW</span>
+  </div>
 
   <div class="record-entry reveal">
     <div class="rec-meta">
-      <div class="rec-period">MAY 2026 — PRESENT</div>
+      <div class="rec-period">MAY 2026 - PRESENT</div>
       <div class="rec-org">York University<br/>Toronto, ON</div>
     </div>
     <div>
       <div class="rec-title">Undergraduate Research Assistant</div>
-      <div class="rec-sub">Faculty Research Team — Laser-Induced Graphene Sensors</div>
+      <div class="rec-sub">Faculty Research Team - Laser-Induced Graphene Sensors</div>
       <ul class="rec-bullets">
         <li>Contributing to LIG sensor development for strain, temperature, and humidity measurement.</li>
         <li>Working the full research loop: material prep → sensor fabrication → testing → documentation → iteration.</li>
@@ -2423,7 +2578,7 @@ body.recruiter-mode .telemetry-group strong{color:var(--green);}
     </div>
     <div>
       <div class="rec-title">IT Intern</div>
-      <div class="rec-sub">Device Operations — Peel Region Schools</div>
+      <div class="rec-sub">Device Operations - Peel Region Schools</div>
       <ul class="rec-bullets">
         <li>Configured and reprogrammed tablets deployed across Peel Region schools and childcare sites.</li>
         <li>Diagnosed and resolved software and hardware issues; prepared large-scale equipment rollouts.</li>
@@ -2448,15 +2603,14 @@ body.recruiter-mode .telemetry-group strong{color:var(--green);}
   <div class="current-ops-grid">
     <article class="current-console reveal">
       <div class="ops-radar-ring" aria-hidden="true"></div>
-      <div class="current-kicker">LIVE QUEUE // ACTIVE BUILDS + TARGET ROLES</div>
-      <h2 class="current-title">What I’m actively building, learning, and aiming toward right now.</h2>
-      <p class="current-copy">Active development queue: graphene sensing systems, aircraft refinement, real-time monitoring tools, and the engineering problems that only show up once something leaves the screen and enters the real world.
-</p>
-      <ul class="ops-checklist">
-        <li><strong>LIG sensor research:</strong>&nbsp;supporting development of laser-induced graphene sensors for strain, temperature, and humidity measurement.</li>
-        <li><strong>Aircraft design refinement:</strong>&nbsp;using CAD thinking to clean up airframe structure, packaging, balance, and manufacturability.</li>
-        <li><strong>Occupancy tracking app:</strong>&nbsp;moving the Noise Tracker idea from sensor demo toward a live system students could actually check.</li>
-        <li><strong>Fall internship search:</strong>&nbsp;targeting hands-on mechanical, aerospace, automotive, manufacturing, testing, sensors, and R&amp;D roles.</li>
+      <div class="current-kicker">ACTIVE QUEUE // RESEARCH + BUILD SYSTEMS</div>
+      <h2 class="current-title">Currently in development.</h2>
+      <p class="current-copy">Current focus areas: graphene sensing systems, aircraft refinement, real-time monitoring tools, and the engineering problems that appear between prototype and deployment.</p>
+      <ul class="ops-checklist ops-checklist-compact">
+        <li><strong>LIG sensors:</strong>&nbsp;fabrication, packaging, testing, and documentation for strain, temperature, and humidity sensing.</li>
+        <li><strong>Aircraft refinement:</strong>&nbsp;cleaner CAD geometry, internal routing, balance, and serviceability.</li>
+        <li><strong>Noise Tracker:</strong>&nbsp;moving from sensor demo toward a real live-status tool for study spaces.</li>
+        <li><strong>Internship search:</strong>&nbsp;targeting hardware, testing, CAD, sensors, manufacturing, and R&amp;D teams.</li>
       </ul>
     </article>
 
@@ -2491,6 +2645,8 @@ body.recruiter-mode .telemetry-group strong{color:var(--green);}
 
 <!-- ═══════════ MISSIONS ═══════════ -->
 <section id="missions" class="section">
+  <span class="ambient-blip" style="top:18%;animation-delay:.8s"></span>
+  <span class="ambient-blip" style="top:64%;animation-delay:3.5s"></span>
   <div class="sector-label reveal">SECTOR-04 // MISSION CONTROL</div>
   <div class="sector-divider reveal"><h2 data-flight-label="HARDWARE I’VE ACTUALLY BUILT" data-recruiter-label="SELECTED PROJECTS">HARDWARE I’VE ACTUALLY BUILT</h2></div>
 
@@ -2516,7 +2672,7 @@ body.recruiter-mode .telemetry-group strong{color:var(--green);}
         </div>
       </div>
       <div class="mission-info">
-        <p class="info-brief">A fully closed-loop sensor-to-actuator system. Reads soil moisture in real time, applies threshold logic, and fires a pump via MOSFET — no manual intervention required. Built to demonstrate that control theory works just as well on a plant as on an aircraft.</p>
+        <p class="info-brief">A fully closed-loop sensor-to-actuator system. Reads soil moisture in real time, applies threshold logic, and fires a pump via MOSFET - no manual intervention required. Built to demonstrate that control theory works just as well on a plant as on an aircraft.</p>
         <div class="recruiter-summary">
           <div class="rs-title">Recruiter snapshot</div>
           <div class="rs-grid">
@@ -2528,7 +2684,7 @@ body.recruiter-mode .telemetry-group strong{color:var(--green);}
         </div>
         <ul class="mission-logs">
           <li>Soil moisture sensor calibration and threshold decision logic</li>
-          <li>MOSFET-based pump driver — safe high-current switching</li>
+          <li>MOSFET-based pump driver - safe high-current switching</li>
           <li>MATLAB serial interface for live state plotting and feedback</li>
           <li>Emergency stop logic and full state-machine control flow</li>
         </ul>
@@ -2553,12 +2709,41 @@ body.recruiter-mode .telemetry-group strong{color:var(--green);}
     </div>
     <div class="mission-title-row">
       <div class="mission-name">AIRFRAME-01 BUILD + FLIGHT LOG</div>
-      <div class="mission-sub">RC Airplane — Scratch Design · Foam Airframe · Twin-Motor · ESC Wiring</div>
+      <div class="mission-sub">RC Airplane - Scratch Design · Foam Airframe · Twin-Motor · ESC Wiring</div>
     </div>
     <div class="mission-body">
       <div class="footage-wrap">
         <div class="slideshow" id="planeSlideshow">
-          <div class="slide active">
+          <div class="slide active blueprint-slide">
+            <div class="blueprint-status">AIRFRAME DESIGN MAP</div>
+            <svg class="blueprint-svg" viewBox="0 0 800 450" preserveAspectRatio="xMidYMid meet">
+              <defs>
+                <pattern id="bpGridSlide" width="28" height="28" patternUnits="userSpaceOnUse">
+                  <path d="M 28 0 L 0 0 0 28" fill="none" stroke="rgba(56,200,232,.15)" stroke-width="1"/>
+                </pattern>
+                <filter id="bpGlowSlide"><feGaussianBlur stdDeviation="2" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+              </defs>
+              <rect width="800" height="450" fill="rgba(2,8,16,.93)"/>
+              <rect width="800" height="450" fill="url(#bpGridSlide)" opacity=".65"/>
+              <g filter="url(#bpGlowSlide)">
+                <path class="bp-line main bp-draw" d="M150 226 L390 156 L652 226 L390 295 Z"/>
+                <path class="bp-line bp-draw" d="M390 156 L390 295 M252 225 L530 225 M348 188 L435 188 M348 262 L435 262"/>
+                <path class="bp-line dashed bp-draw" d="M330 225 C365 205 417 204 456 225 C420 246 366 246 330 225"/>
+                <circle class="bp-dot" cx="365" cy="225" r="8"/><circle class="bp-dot" cx="292" cy="216" r="7"/><circle class="bp-dot" cx="488" cy="216" r="7"/>
+                <rect class="bp-part" x="377" y="205" width="28" height="40" rx="4"/>
+                <rect class="bp-part" x="335" y="213" width="34" height="24" rx="3"/>
+                <path class="bp-wire" d="M391 225 C420 207 450 206 488 216 M391 225 C360 207 325 206 292 216"/>
+              </g>
+              <g class="bp-callout show"><path d="M292 216 L218 124 L126 124"/><text x="36" y="118">MOTOR PLACEMENT</text><text x="36" y="137" class="mini">Twin motor layout</text></g>
+              <g class="bp-callout show"><path d="M335 225 L250 312 L110 312"/><text x="32" y="306">BATTERY LOCATION</text><text x="32" y="325" class="mini">Mass placement for balance</text></g>
+              <g class="bp-callout show"><path d="M365 225 L365 85 L492 85"/><text x="506" y="79">CENTER OF GRAVITY</text><text x="506" y="98" class="mini">Main stability checkpoint</text></g>
+              <g class="bp-callout show"><path d="M530 225 L612 154 L732 154"/><text x="628" y="148">WING STRUCTURE</text><text x="628" y="167" class="mini">Foam span and shell</text></g>
+              <g class="bp-callout show"><path d="M391 225 L515 303 L721 303"/><text x="544" y="297">WIRING ROUTE</text><text x="544" y="316" class="mini">ESC, battery, motor leads</text></g>
+              <g class="bp-callout show"><path d="M391 225 L468 374 L665 374"/><text x="486" y="368">FLIGHT CONTROLLER</text><text x="486" y="387" class="mini">PCB integration</text></g>
+            </svg>
+            <div class="slide-cap">AIRFRAME DESIGN MAP // SYSTEM LAYOUT</div>
+          </div>
+          <div class="slide">
             <iframe src="https://www.youtube.com/embed/L-_7fKUDGoE?rel=0&modestbranding=1"
               title="RC Airplane flight footage"
               allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"
@@ -2566,7 +2751,7 @@ body.recruiter-mode .telemetry-group strong{color:var(--green);}
             <div class="slide-cap">▶ FLIGHT FOOTAGE // AIRFRAME-01</div>
           </div>
           <div class="slide">
-            <img src="plane_top_open.jpg" alt="Airframe top view — electronics and motor wiring exposed" loading="lazy"/>
+            <img src="plane_top_open.jpg" alt="Airframe top view - electronics and motor wiring exposed" loading="lazy"/>
             <div class="slide-cap">AIRFRAME TOP VIEW // ELECTRONICS EXPOSED</div>
           </div>
           <div class="slide">
@@ -2584,6 +2769,7 @@ body.recruiter-mode .telemetry-group strong{color:var(--green);}
             <button class="sdot" onclick="slideTo(1)" aria-label="Slide 2"></button>
             <button class="sdot" onclick="slideTo(2)" aria-label="Slide 3"></button>
             <button class="sdot" onclick="slideTo(3)" aria-label="Slide 4"></button>
+            <button class="sdot" onclick="slideTo(4)" aria-label="Slide 5"></button>
           </div>
         </div>
 
@@ -2658,7 +2844,7 @@ body.recruiter-mode .telemetry-group strong{color:var(--green);}
         </div>
       </div>
       <div class="mission-info">
-        <p class="info-brief">Designed and assembled a flyable twin-motor RC aircraft. Every variable — motor placement, prop pitch, CG, battery routing, wiring — had immediate physical consequences on whether it flew or didn't. That feedback loop is what engineering is.</p>
+        <p class="info-brief">Designed and assembled a flyable twin-motor RC aircraft. Every variable - motor placement, prop pitch, CG, battery routing, wiring - had immediate physical consequences on whether it flew or didn't. That feedback loop is what engineering is.</p>
         <div class="recruiter-summary">
           <div class="rs-title">Recruiter snapshot</div>
           <div class="rs-grid">
@@ -2672,7 +2858,7 @@ body.recruiter-mode .telemetry-group strong{color:var(--green);}
           <li>Foam glider airframe modified for twin brushed motors</li>
           <li>GD005/GD006 flight controller wiring and integration</li>
           <li>Motor, propeller and battery placement for CG balance</li>
-          <li>Multiple test iterations — throttle response and stability tuning</li>
+          <li>Multiple test iterations - throttle response and stability tuning</li>
         </ul>
         <div class="mission-systems">
           <span class="sys-tag amber">Airframe Design</span>
@@ -2756,7 +2942,7 @@ body.recruiter-mode .telemetry-group strong{color:var(--green);}
         <span class="mc-id-badge">M-04 // RECON</span>
       </div>
       <div class="mc-title">REEF RECON SYSTEM</div>
-      <p class="mc-desc">AI-assisted early detection of coral reef disease via autonomous scanning. Built at UNHack — finished 2nd place overall after reaching the final pitch stage against 20+ teams.</p>
+      <p class="mc-desc">AI-assisted early detection of coral reef disease via autonomous scanning. Built at UNHack - finished 2nd place overall after reaching the final pitch stage against 20+ teams.</p>
       <div class="mc-tags">
         <span class="sys-tag amber">AI</span>
         <span class="sys-tag green">★ UNHack 2nd</span>
@@ -2775,7 +2961,7 @@ body.recruiter-mode .telemetry-group strong{color:var(--green);}
       <div class="mc-tags">
         <span class="sys-tag cyan">Computer Vision</span>
         <span class="sys-tag amber">Servo Control</span>
-        <span class="sys-tag dim">Embedded HW</span>
+        <span class="sys-tag dim">Embedded Systems</span>
       </div>
     </article>
 
@@ -2790,9 +2976,9 @@ body.recruiter-mode .telemetry-group strong{color:var(--green);}
   <div class="systems-grid reveal">
     <div class="sys-col">
       <div class="sys-col-head">DESIGN &amp; CAD</div>
-      <div class="sys-item">SolidWorks — parts, assemblies, drawings</div>
-      <div class="sys-item">Fusion 360 — integrated design &amp; CAM</div>
-      <div class="sys-item">AutoCAD — 2D drafting and layouts</div>
+      <div class="sys-item">SolidWorks - parts, assemblies, drawings</div>
+      <div class="sys-item">Fusion 360 - integrated design &amp; CAM</div>
+      <div class="sys-item">AutoCAD - 2D drafting and layouts</div>
       <div class="sys-item">Design iteration, GD&amp;T fundamentals</div>
       <div class="sys-bar-wrap">
         <div class="sys-bar-label"><span>PROFICIENCY</span><span style="color:var(--amber)">78%</span></div>
@@ -2801,7 +2987,7 @@ body.recruiter-mode .telemetry-group strong{color:var(--green);}
     </div>
     <div class="sys-col">
       <div class="sys-col-head">HARDWARE &amp; CIRCUITS</div>
-      <div class="sys-item">Arduino — programming and wiring</div>
+      <div class="sys-item">Arduino - programming and wiring</div>
       <div class="sys-item">Grove sensor ecosystem integration</div>
       <div class="sys-item">MOSFET driver circuits, relay control</div>
       <div class="sys-item">Soil moisture, DHT20, sound sensors</div>
@@ -2812,9 +2998,9 @@ body.recruiter-mode .telemetry-group strong{color:var(--green);}
     </div>
     <div class="sys-col">
       <div class="sys-col-head">PROGRAMMING</div>
-      <div class="sys-item">MATLAB — data analysis, plotting, serial</div>
-      <div class="sys-item">Java — OOP, coursework, logic</div>
-      <div class="sys-item">Python — scripting and analysis</div>
+      <div class="sys-item">MATLAB - data analysis, plotting, serial</div>
+      <div class="sys-item">Java - OOP, coursework, logic</div>
+      <div class="sys-item">Python - scripting and analysis</div>
       <div class="sys-item">Arduino C/C++ for embedded control</div>
       <div class="sys-bar-wrap">
         <div class="sys-bar-label"><span>PROFICIENCY</span><span style="color:var(--amber)">74%</span></div>
@@ -2841,16 +3027,19 @@ body.recruiter-mode .telemetry-group strong{color:var(--green);}
   <div class="sector-divider reveal"><h2 data-flight-label="TRAINING RECORD" data-recruiter-label="EDUCATION">TRAINING RECORD</h2></div>
 
   <div class="academy-grid reveal">
-    <div class="academy-card">
-      <div class="ac-year">2025 — PRESENT</div>
+    <div class="academy-card academy-primary-card">
+      <div class="ac-year">2025 - PRESENT</div>
       <div class="ac-degree">BEng MECHANICAL ENGINEERING, Co-op</div>
       <div class="ac-school">YORK UNIVERSITY // TORONTO, ON</div>
-      <p class="ac-body">Building a rigorous mechanical engineering foundation while connecting coursework directly to hardware, sensors, and research outside the classroom. Currently active as an undergraduate research assistant.</p>
-      <div class="hero-badges">
-        <span class="badge" style="border-color:rgba(3,5,10,.25);color:rgba(3,5,10,.7);">MECH DESIGN</span>
-        <span class="badge" style="border-color:rgba(3,5,10,.25);color:rgba(3,5,10,.7);">ENG LABS</span>
-        <span class="badge" style="border-color:rgba(3,5,10,.25);color:rgba(3,5,10,.7);">CO-OP</span>
-      </div>
+      <details class="training-details">
+        <summary>+ VIEW TRAINING DETAILS</summary>
+        <p class="ac-body">Building a mechanical engineering foundation while connecting coursework directly to hardware, sensors, CAD, and research outside the classroom.</p>
+        <div class="hero-badges training-badges">
+          <span class="badge">MECH DESIGN</span>
+          <span class="badge">ENG LABS</span>
+          <span class="badge">CO-OP</span>
+        </div>
+      </details>
     </div>
     <div class="academy-card">
       <div class="ac-year">GRADUATED 2025</div>
@@ -2915,7 +3104,7 @@ body.recruiter-mode .telemetry-group strong{color:var(--green);}
       <span class="comm-icon">📍</span>
       <div class="comm-meta">
         <div class="comm-type">COORDINATES // BASE OF OPERATIONS</div>
-        <div class="comm-val">Toronto / GTA, Ontario — 43.77°N 79.50°W</div>
+        <div class="comm-val">Toronto / GTA, Ontario - 43.77°N 79.50°W</div>
       </div>
     </div>
   </div>
@@ -2954,7 +3143,7 @@ const bootLines = [
   { t:'  ▸ PILOT ID   :  HJ-001', cls:'b-pilot', delay:3900 },
   { t:'  ▸ NAME       :  HARSHIL JADAWALA', cls:'b-pilot', delay:4050 },
   { t:'  ▸ ROLE       :  MECH ENG // RESEARCH ASSISTANT', cls:'b-pilot', delay:4200 },
-  { t:'  ▸ CLEARANCE  :  ACTIVE — CO-OP AUTHORIZED', cls:'b-pilot', delay:4350 },
+  { t:'  ▸ CLEARANCE  :  ACTIVE - CO-OP AUTHORIZED', cls:'b-pilot', delay:4350 },
   { t:'', delay:4500, bar:100 },
   { t:'  ALL SYSTEMS NOMINAL.', cls:'b-success', delay:4700 },
   { t:'  WELCOME BACK, PILOT.', cls:'b-success', delay:4900 },
