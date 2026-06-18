@@ -2152,32 +2152,8 @@ body.recruiter-mode .mission-featured{margin-bottom:22px!important;}
   animation:blip-run 7s linear infinite;
 }
 @keyframes blip-run{0%{transform:translateX(-20vw);opacity:0;}10%{opacity:.7;}85%{opacity:.5;}100%{transform:translateX(105vw);opacity:0;}}
-#missions::after{
-  content:'';
-  position:absolute;
-  left:5vw;
-  top:135px;
-  width:220px;
-  height:78%;
-  pointer-events:none;
-  opacity:.28;
-  background:
-    linear-gradient(var(--amber),var(--amber)) 24px 0/1px 100% no-repeat,
-    radial-gradient(circle,var(--amber-b) 0 3px,transparent 4px) 20px 8px/40px 150px repeat-y;
-  filter:drop-shadow(0 0 8px rgba(255,204,68,.22));
-}
-#missions .sector-divider::before{
-  content:'MISSION INDEX';
-  position:absolute;
-  left:0;
-  top:4.5rem;
-  font-family:var(--font-m);
-  font-size:.56rem;
-  letter-spacing:.18em;
-  color:rgba(255,204,68,.5);
-}
 @media(max-width:1100px){.record-entry{max-width:100%;}.service-airframe-ghost{opacity:.08;right:1vw;}}
-@media(max-width:860px){.service-airframe-ghost,#missions::after,#missions .sector-divider::before{display:none;}.record-entry{max-width:100%;}}
+@media(max-width:860px){.service-airframe-ghost{display:none;}.record-entry{max-width:100%;}}
 
 
 
@@ -2312,25 +2288,6 @@ body.recruiter-mode .mission-featured{margin-bottom:22px!important;}
 
 
 <!-- SCROLL FLIGHT PLAN -->
-<aside class="flight-plan-sidebar" role="scrollbar" aria-label="Draggable flight plan scroll control" aria-orientation="vertical">
-  <div class="fp-label">FLIGHT PLAN</div>
-  <svg class="fp-map" viewBox="0 0 92 780" preserveAspectRatio="none">
-    <path id="fpPathBase" class="fp-path-base" d="M46 18 C 18 115 78 192 47 280 C 18 365 75 455 42 535 C 15 610 70 690 46 762"/>
-    <path id="fpPathProgress" class="fp-path-progress" d="M46 18 C 18 115 78 192 47 280 C 18 365 75 455 42 535 C 15 610 70 690 46 762"/>
-    <g class="fp-nodes">
-      <circle cx="46" cy="18" r="4"/>
-      <circle cx="47" cy="280" r="3"/>
-      <circle cx="42" cy="535" r="3"/>
-      <circle cx="46" cy="762" r="4"/>
-    </g>
-    <g id="fpPlaneMarker" class="fp-plane-marker">
-      <path d="M0 -12 L4 7 L0 4 L-4 7 Z"/>
-      <path d="M-12 -1 L12 -1 L0 -5 Z"/>
-    </g>
-  </svg>
-  <div class="fp-readout"><span id="fpStatus">TAKEOFF</span><small id="fpPct">000%</small></div>
-  <div class="fp-drag-hint">DRAG TO SCROLL</div>
-</aside>
 
 <!-- ═══════════ BOOT SEQUENCE ═══════════ -->
 <div id="boot" role="dialog" aria-label="System initializing">
@@ -3545,44 +3502,15 @@ function slidePrev() { slideTo(slideIdx - 1); }
 //  SCROLL-LINKED FLIGHT SYSTEMS
 // ═══════════════════════════════════════════════════════
 (function scrollLinkedFlightSystems(){
-  const path = document.getElementById('fpPathProgress');
-  const basePath = document.getElementById('fpPathBase');
-  const plane = document.getElementById('fpPlaneMarker');
-  const status = document.getElementById('fpStatus');
-  const pct = document.getElementById('fpPct');
   const navAlt = document.getElementById('navAlt');
   const altTape = document.getElementById('altTape');
   const altFill = document.getElementById('altTapeFill');
   const speedTape = document.getElementById('speedTape');
   const missionPanels = document.querySelectorAll('.mission-featured');
   const missionCards = document.querySelectorAll('.mission-card');
-  const allSections = Array.from(document.querySelectorAll('section[id]'));
-
-  if (!path || !basePath || !plane) return;
-
-  const len = path.getTotalLength();
-  path.style.strokeDasharray = len;
-  path.style.strokeDashoffset = len;
 
   let lastY = window.scrollY;
   function clamp(v,min,max){ return Math.max(min, Math.min(max, v)); }
-
-  function activeSectionLabel(){
-    let cur = 'cockpit';
-    allSections.forEach(s => {
-      if (window.scrollY >= s.offsetTop - 140) cur = s.id;
-    });
-    return ({
-      cockpit:'TAKEOFF',
-      about:'BRIEFING',
-      record:'LOGBOOK',
-      current:'ACTIVE OPS',
-      missions:'MISSION RUN',
-      systems:'SYSTEMS',
-      academy:'ACADEMY',
-      comms:'LANDING'
-    })[cur] || 'CRUISE';
-  }
 
   function updateProjectDrift(){
     const vh = window.innerHeight || 1;
@@ -3606,16 +3534,7 @@ function slidePrev() { slideTo(slideIdx - 1); }
   function update(){
     const max = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
     const p = clamp(window.scrollY / max, 0, 1);
-    const dir = window.scrollY >= lastY ? 1 : -1;
     lastY = window.scrollY;
-
-    path.style.strokeDashoffset = len * (1 - p);
-
-    const point = basePath.getPointAtLength(len * p);
-    const leadPoint = basePath.getPointAtLength(clamp(len * p + (dir * 12), 0, len));
-    const angle = Math.atan2(leadPoint.y - point.y, leadPoint.x - point.x) * 180 / Math.PI + 90;
-    const bank = dir > 0 ? -10 : 10;
-    plane.setAttribute('transform', `translate(${point.x} ${point.y}) rotate(${angle + bank})`);
 
     const altitude = Math.round(1200 + Math.sin(p * Math.PI) * 33800);
     const speed = Math.round(120 + Math.sin(p * Math.PI) * 360);
@@ -3624,69 +3543,12 @@ function slidePrev() { slideTo(slideIdx - 1); }
     if (altFill) altFill.style.height = clamp((altitude / 35000) * 100, 8, 96).toFixed(1) + '%';
     if (speedTape) speedTape.textContent = speed;
 
-    status.textContent = activeSectionLabel();
-    pct.textContent = String(Math.round(p * 100)).padStart(3,'0') + '%';
     updateProjectDrift();
   }
 
   update();
   window.addEventListener('scroll', update, { passive:true });
   window.addEventListener('resize', update);
-})();
-
-// ═══════════════════════════════════════════════════════
-//  DRAGGABLE FLIGHT PLAN SCROLL CONTROL
-// ═══════════════════════════════════════════════════════
-(function draggableFlightPlan(){
-  const sidebar = document.querySelector('.flight-plan-sidebar');
-  const map = document.querySelector('.fp-map');
-  if (!sidebar || !map) return;
-
-  const clamp = (v,min,max) => Math.max(min, Math.min(max, v));
-  let dragging = false;
-
-  function progressFromPointer(e){
-    const rect = map.getBoundingClientRect();
-    return clamp((e.clientY - rect.top) / Math.max(1, rect.height), 0, 1);
-  }
-
-  function scrollToProgress(progress){
-    const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
-    window.scrollTo({ top: progress * maxScroll, behavior: 'auto' });
-  }
-
-  function jump(e){
-    if (document.body.classList.contains('recruiter-mode')) return;
-    e.preventDefault();
-    scrollToProgress(progressFromPointer(e));
-  }
-
-  sidebar.addEventListener('pointerdown', (e) => {
-    if (document.body.classList.contains('recruiter-mode')) return;
-    dragging = true;
-    sidebar.classList.add('dragging');
-    sidebar.setPointerCapture?.(e.pointerId);
-    jump(e);
-  });
-
-  sidebar.addEventListener('pointermove', (e) => {
-    if (!dragging) return;
-    jump(e);
-  });
-
-  function endDrag(e){
-    if (!dragging) return;
-    dragging = false;
-    sidebar.classList.remove('dragging');
-    try { sidebar.releasePointerCapture?.(e.pointerId); } catch(err) {}
-  }
-
-  sidebar.addEventListener('pointerup', endDrag);
-  sidebar.addEventListener('pointercancel', endDrag);
-  sidebar.addEventListener('lostpointercapture', () => {
-    dragging = false;
-    sidebar.classList.remove('dragging');
-  });
 })();
 
 // ═══════════════════════════════════════════════════════
