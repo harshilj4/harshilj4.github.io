@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Share+Tech+Mono&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='4' fill='%2303050a' stroke='%23e8a020' stroke-width='1.5'/><text x='16' y='22' text-anchor='middle' font-family='monospace' font-weight='bold' font-size='14' fill='%23e8a020'>HJ</text></svg>"/>
 <style>
 /* ═══════════════════════════════════════════════════════
    VARIABLES + RESET
@@ -2130,18 +2131,13 @@ body::after{
 .bp-callout.show{opacity:1;transform:none;}
 .blueprint-slide.active .bp-draw{stroke-dasharray:900;stroke-dashoffset:900;animation:bp-map-draw 2.4s ease forwards;}
 @keyframes bp-map-draw{to{stroke-dashoffset:0;}}
-body.recruiter-mode #current .ops-stack,
 body.recruiter-mode .mission-logs,
-body.recruiter-mode .engineering-notes,
-body.recruiter-mode .mission-systems,
-body.recruiter-mode .mission-outcomes,
 body.recruiter-mode .service-airframe-ghost,
 body.recruiter-mode .live-telemetry,
 body.recruiter-mode .wireframe-aircraft{display:none!important;}
-body.recruiter-mode .current-ops-grid{grid-template-columns:1fr;max-width:920px;}
+body.recruiter-mode .current-ops-grid{max-width:1080px;}
 body.recruiter-mode .current-console{padding:1.4rem;min-height:0;}
-body.recruiter-mode .mission-body{grid-template-columns:1fr!important;}
-body.recruiter-mode .footage-wrap{display:none!important;}
+body.recruiter-mode .mission-body{grid-template-columns:minmax(0,1fr) 340px;}
 body.recruiter-mode .mission-info{gap:.75rem;padding:1rem 1.15rem;}
 body.recruiter-mode .info-brief{font-size:.82rem;line-height:1.5;}
 body.recruiter-mode .recruiter-summary{display:block;padding:.75rem;}
@@ -2199,6 +2195,77 @@ body.recruiter-mode .mission-featured{margin-bottom:22px!important;}
   .slide iframe{
     max-width:100%;
   }
+}
+
+/* ═══════════════════════════════════════════════════════
+   MOBILE NAVIGATION
+═══════════════════════════════════════════════════════ */
+.nav-burger{
+  display:none;
+  background:none;
+  border:1px solid var(--muted);
+  color:var(--amber);
+  width:36px;height:36px;
+  cursor:pointer;
+  align-items:center;justify-content:center;
+  padding:0;
+  transition:border-color .15s,color .15s;
+}
+.nav-burger:hover{border-color:var(--amber);}
+.nav-burger svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;}
+.nav-mobile-overlay{
+  position:fixed;inset:0;
+  background:rgba(0,0,0,.5);
+  z-index:9997;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .28s ease;
+}
+.nav-mobile-overlay.open{opacity:1;pointer-events:auto;}
+.nav-mobile-panel{
+  position:fixed;
+  top:0;right:0;
+  width:min(300px,82vw);
+  height:100vh;height:100dvh;
+  background:rgba(3,5,10,.97);
+  border-left:1px solid var(--line);
+  backdrop-filter:blur(16px);
+  z-index:9998;
+  transform:translateX(100%);
+  transition:transform .28s ease;
+  padding:calc(var(--nav-h) + 24px) 1.5rem 2rem;
+  display:flex;
+  flex-direction:column;
+  gap:.4rem;
+  overflow-y:auto;
+}
+.nav-mobile-panel.open{transform:translateX(0);}
+.nav-mobile-panel a{
+  display:block;
+  font-family:var(--font-m);
+  font-size:.72rem;
+  letter-spacing:.18em;
+  color:var(--muted);
+  padding:.85rem .8rem;
+  border:1px solid var(--line);
+  transition:color .15s,border-color .15s,background .15s;
+}
+.nav-mobile-panel a:hover,
+.nav-mobile-panel a.active{
+  color:var(--amber);
+  border-color:rgba(232,160,32,.3);
+  background:rgba(232,160,32,.04);
+}
+.nav-mobile-mode{
+  margin-top:auto;
+  padding-top:1rem;
+  border-top:1px solid var(--line);
+}
+.nav-mobile-mode .mode-toggle{width:100%;}
+@media(max-width:860px){
+  .nav-burger{display:flex;}
+  nav .mode-toggle{display:none;}
+  body.recruiter-mode .mission-body{grid-template-columns:1fr;}
 }
 
 </style>
@@ -2300,12 +2367,33 @@ body.recruiter-mode .mission-featured{margin-bottom:22px!important;}
     <span class="mode-toggle-main">RECRUITER MODE</span>
     <span class="mode-toggle-sub">clean view</span>
   </button>
+  <button class="nav-burger" id="navBurger" type="button" aria-label="Open navigation menu" aria-expanded="false">
+    <svg viewBox="0 0 24 24"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+  </button>
   <div class="nav-telem" aria-label="Flight telemetry">
     <span>HDG&nbsp;<span class="telem-val" id="navHdg">270</span>°W</span>
     <span class="sep">|</span>
     <span>ALT&nbsp;<span class="telem-val" id="navAlt">35,000</span>ft</span>
     <span class="sep">|</span>
     <span><span class="status-dot" aria-hidden="true"></span>ONLINE</span>
+  </div>
+</nav>
+
+<div class="nav-mobile-overlay" id="navOverlay"></div>
+<nav class="nav-mobile-panel" id="navMobile" aria-label="Mobile navigation">
+  <a href="#cockpit" data-flight-label="COCKPIT" data-recruiter-label="HOME">COCKPIT</a>
+  <a href="#about" data-flight-label="ABOUT" data-recruiter-label="ABOUT">ABOUT</a>
+  <a href="#record" data-flight-label="RECORD" data-recruiter-label="EXPERIENCE">RECORD</a>
+  <a href="#current" data-flight-label="CURRENT" data-recruiter-label="CURRENT WORK">CURRENT</a>
+  <a href="#missions" data-flight-label="MISSIONS" data-recruiter-label="PROJECTS">MISSIONS</a>
+  <a href="#systems" data-flight-label="SYSTEMS" data-recruiter-label="SKILLS">SYSTEMS</a>
+  <a href="#academy" data-flight-label="ACADEMY" data-recruiter-label="EDUCATION">ACADEMY</a>
+  <a href="#comms" data-flight-label="COMMS" data-recruiter-label="CONTACT">COMMS</a>
+  <div class="nav-mobile-mode">
+    <button class="mode-toggle" type="button" aria-pressed="false">
+      <span class="mode-toggle-main">RECRUITER MODE</span>
+      <span class="mode-toggle-sub">clean view</span>
+    </button>
   </div>
 </nav>
 
@@ -2890,10 +2978,62 @@ body.recruiter-mode .mission-featured{margin-bottom:22px!important;}
     </div>
   </div>
 
-  <!-- M-03: NOISE TRACKER -->
-  <div class="mission-featured reveal tilt-flat" style="margin-top:2px;">
+  <!-- M-03: LASER TRACKING TURRET -->
+  <div class="mission-featured reveal tilt-left" style="margin-top:2px;">
     <div class="mission-header">
       <span class="mission-id">MISSION-03</span>
+      <span class="mission-cls">// CLASSIFICATION: COMPUTER VISION &amp; CONTROL SYSTEMS</span>
+      <span class="mission-status complete">● COMPLETE</span>
+    </div>
+    <div class="mission-title-row">
+      <div class="mission-name">LASER TRACKING TURRET</div>
+      <div class="mission-sub">Real-Time CV Target Acquisition · OpenCV · Python · Servo Control</div>
+    </div>
+    <div class="mission-body">
+      <div class="footage-wrap">
+        <div class="footage-label">MISSION FOOTAGE // TRACKING DEMONSTRATION</div>
+        <div class="footage-inner">
+          <iframe src="https://www.youtube.com/embed/wk9M-Nd7YqA?rel=0&modestbranding=1&origin=https%3A%2F%2Fharshilj4.github.io"
+            title="Laser Tracking Turret demo"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        </div>
+      </div>
+      <div class="mission-info">
+        <p class="info-brief">A real-time computer vision tracking turret that uses OpenCV color detection to acquire, lock onto, and follow a moving target. The system computes the centroid of the tracked object and drives two-axis servo aim through a control loop with smoothing, dead-zone logic, and noise rejection — turning raw pixel data into stable physical motion.</p>
+        <div class="recruiter-summary">
+          <div class="rs-title">Recruiter snapshot</div>
+          <div class="rs-grid">
+            <span><strong>Problem</strong> Build a system that tracks a moving target in real time using only a camera and servos.</span>
+            <span><strong>Built</strong> OpenCV pipeline with HSV filtering, centroid extraction, smoothing, dead-zone logic, and two-axis servo control.</span>
+            <span><strong>Tools</strong> Python, OpenCV, Arduino, servo motors, serial communication, control loop tuning.</span>
+            <span><strong>Result</strong> Working turret that acquires and tracks colored targets with stable, low-latency response.</span>
+          </div>
+        </div>
+        <ul class="mission-logs">
+          <li>HSV color space filtering for robust target isolation under variable lighting</li>
+          <li>Centroid computation via contour analysis and moment calculation</li>
+          <li>Signal smoothing and dead-zone thresholds to eliminate servo jitter</li>
+          <li>Two-axis servo control driven by serial Arduino communication</li>
+          <li>Real-time closed-loop pipeline: camera → processing → actuation</li>
+        </ul>
+        <div class="mission-systems">
+          <span class="sys-tag cyan">OpenCV</span>
+          <span class="sys-tag cyan">Python</span>
+          <span class="sys-tag amber">Computer Vision</span>
+          <span class="sys-tag amber">Servo Control</span>
+          <span class="sys-tag green">Arduino</span>
+          <span class="sys-tag dim">Control Systems</span>
+          <span class="sys-tag dim">Real-Time</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- M-04: NOISE TRACKER -->
+  <div class="mission-featured reveal tilt-flat" style="margin-top:2px;">
+    <div class="mission-header">
+      <span class="mission-id">MISSION-04</span>
       <span class="mission-cls">// CLASSIFICATION: SENSORS &amp; IoT &amp; UX RESEARCH</span>
       <span class="mission-status active">▲ IN PROGRESS</span>
     </div>
@@ -2953,12 +3093,12 @@ body.recruiter-mode .mission-featured{margin-bottom:22px!important;}
   </div>
 
   <!-- Compact missions row -->
-  <div class="missions-row" style="margin-top:2px;">
+  <div class="missions-row" style="margin-top:2px;grid-template-columns:1fr;">
 
     <article class="mission-card reveal">
       <div class="mc-top">
         <span class="mc-icon">🪸</span>
-        <span class="mc-id-badge">M-04 // RECON</span>
+        <span class="mc-id-badge">M-05 // RECON</span>
       </div>
       <div class="mc-title">REEF RECON SYSTEM</div>
       <p class="mc-desc">AI-assisted early detection of coral reef disease via autonomous scanning. Built at UNHack - finished 2nd place overall after reaching the final pitch stage against 20+ teams.</p>
@@ -2967,20 +3107,6 @@ body.recruiter-mode .mission-featured{margin-bottom:22px!important;}
         <span class="sys-tag green">★ UNHack 2nd</span>
         <span class="sys-tag dim">Sustainability</span>
         <span class="sys-tag dim">Pitch</span>
-      </div>
-    </article>
-
-    <article class="mission-card reveal">
-      <div class="mc-top">
-        <span class="mc-icon">🎯</span>
-        <span class="mc-id-badge">M-05 // PROTOTYPE</span>
-      </div>
-      <div class="mc-title">TARGET TRACKING TURRET</div>
-      <p class="mc-desc">Webcam-based color target detection feeding real-time servo control for a miniature tracking turret. Primary challenge: minimizing latency and jitter between detection and physical response.</p>
-      <div class="mc-tags">
-        <span class="sys-tag cyan">Computer Vision</span>
-        <span class="sys-tag amber">Servo Control</span>
-        <span class="sys-tag dim">Embedded Systems</span>
       </div>
     </article>
 
@@ -3078,7 +3204,7 @@ body.recruiter-mode .mission-featured{margin-bottom:22px!important;}
 <section id="comms" class="section" style="padding:0;">
   <div class="comms-left">
     <div>
-      <div class="sector-label">SECTOR-06 // COMMS ARRAY</div>
+      <div class="sector-label">SECTOR-07 // COMMS ARRAY</div>
       <div class="comms-title">OPEN<br/>COMMS.</div>
       <p class="comms-blurb">
         Open to co-op opportunities, research roles, and conversations with people working in aerospace, automotive, manufacturing, testing, or hardware R&amp;D.
@@ -3183,7 +3309,7 @@ body.recruiter-mode .mission-featured{margin-bottom:22px!important;}
 // ═══════════════════════════════════════════════════════
 const bootLines = [
   { t:'HJ-1  FLIGHT MANAGEMENT SYSTEM  //  v3.0.0', cls:'b-title', delay:0 },
-  { t:'ANTHROPIC AEROSPACE // YORK UNIVERSITY DIVISION', cls:'b-dim', delay:120 },
+  { t:'HJ-1 SYSTEMS // YORK UNIVERSITY ENGINEERING', cls:'b-dim', delay:120 },
   { t:'', delay:280 },
   { t:'INITIALIZING SUBSYSTEMS...', delay:400 },
   { t:'', delay:500 },
@@ -3249,9 +3375,9 @@ bootLines.forEach(({ t, cls, delay, bar: barVal }) => {
   }, delay);
 });
 
-// No auto-launch: the cockpit waits for an intentional click.
 document.getElementById('bootSkip')?.addEventListener('click', launchSite);
 document.getElementById('boot')?.addEventListener('click', launchSite);
+setTimeout(launchSite, 5800);
 
 // ═══════════════════════════════════════════════════════
 //  HEADING TAPE
@@ -3300,7 +3426,7 @@ document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
 // ═══════════════════════════════════════════════════════
 //  ACTIVE NAV LINKS
 // ═══════════════════════════════════════════════════════
-const navLinks = document.querySelectorAll('.nav-links a');
+const navLinks = document.querySelectorAll('.nav-links a, .nav-mobile-panel a');
 const sections = document.querySelectorAll('section[id]');
 window.addEventListener('scroll', () => {
   let cur = '';
@@ -3338,11 +3464,9 @@ function slidePrev() { slideTo(slideIdx - 1); }
 //  RECRUITER MODE / FLIGHT MODE TOGGLE
 // ═══════════════════════════════════════════════════════
 (function recruiterModeToggle(){
-  const button = document.getElementById('modeToggle');
-  if (!button) return;
+  const buttons = Array.from(document.querySelectorAll('.mode-toggle'));
+  if (!buttons.length) return;
 
-  const main = button.querySelector('.mode-toggle-main');
-  const sub = button.querySelector('.mode-toggle-sub');
   const labelTargets = Array.from(document.querySelectorAll('[data-flight-label][data-recruiter-label]'));
   const storageKey = 'hj-portfolio-view-mode';
 
@@ -3355,9 +3479,13 @@ function slidePrev() { slideTo(slideIdx - 1); }
 
   function setMode(isRecruiter, persist = true){
     document.body.classList.toggle('recruiter-mode', isRecruiter);
-    button.setAttribute('aria-pressed', String(isRecruiter));
-    if (main) main.textContent = isRecruiter ? 'FLIGHT MODE' : 'RECRUITER MODE';
-    if (sub) sub.textContent = isRecruiter ? 'restore HUD' : 'clean view';
+    buttons.forEach(btn => {
+      btn.setAttribute('aria-pressed', String(isRecruiter));
+      const m = btn.querySelector('.mode-toggle-main');
+      const s = btn.querySelector('.mode-toggle-sub');
+      if (m) m.textContent = isRecruiter ? 'FLIGHT MODE' : 'RECRUITER MODE';
+      if (s) s.textContent = isRecruiter ? 'restore HUD' : 'clean view';
+    });
     setLabels(isRecruiter);
 
     const navStatus = document.getElementById('fpStatus');
@@ -3367,20 +3495,49 @@ function slidePrev() { slideTo(slideIdx - 1); }
       try { localStorage.setItem(storageKey, isRecruiter ? 'recruiter' : 'flight'); } catch(err) {}
     }
 
-    // Force scroll-driven UI and active nav to refresh after layout changes.
     window.dispatchEvent(new Event('scroll'));
     window.dispatchEvent(new Event('resize'));
   }
 
-  button.addEventListener('click', (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setMode(!document.body.classList.contains('recruiter-mode'));
+  buttons.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      setMode(!document.body.classList.contains('recruiter-mode'));
+    });
   });
 
   let saved = 'flight';
   try { saved = localStorage.getItem(storageKey) || 'flight'; } catch(err) {}
   setMode(saved === 'recruiter', false);
+})();
+
+// ═══════════════════════════════════════════════════════
+//  MOBILE NAVIGATION
+// ═══════════════════════════════════════════════════════
+(function mobileNav(){
+  const burger = document.getElementById('navBurger');
+  const panel = document.getElementById('navMobile');
+  const overlay = document.getElementById('navOverlay');
+  if (!burger || !panel || !overlay) return;
+
+  function open(){
+    panel.classList.add('open');
+    overlay.classList.add('open');
+    burger.setAttribute('aria-expanded','true');
+  }
+  function close(){
+    panel.classList.remove('open');
+    overlay.classList.remove('open');
+    burger.setAttribute('aria-expanded','false');
+  }
+
+  burger.addEventListener('click', () => {
+    panel.classList.contains('open') ? close() : open();
+  });
+  overlay.addEventListener('click', close);
+  panel.querySelectorAll('a').forEach(a => a.addEventListener('click', close));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
 })();
 
 // ═══════════════════════════════════════════════════════
@@ -3608,6 +3765,10 @@ function slidePrev() { slideTo(slideIdx - 1); }
       items:[['FLIGHT TEST','Built and tested a flyable aircraft'],['STABILITY','CG and battery placement tuned'],['INTEGRATION','Motors, wiring, PCB, airframe combined'],['RESULT','Real physical feedback guided revisions']]
     },
     {
+      match:'LASER TRACKING TURRET',
+      items:[['TRACKING','Real-time centroid lock on moving target'],['STABILITY','Dead-zone + smoothing eliminated servo jitter'],['PIPELINE','Camera → HSV filter → contour → centroid → servo'],['LATENCY','Tuned for responsive physical tracking']]
+    },
+    {
       match:'ACOUSTIC MAPPING + OCCUPANCY SYSTEM',
       items:[['SIGNAL','Sound readings classified into room states'],['FIELD TEST','Tested in York study spaces'],['UX','Student problem framed around live availability'],['NEXT','Backend + live status infrastructure']]
     }
@@ -3644,12 +3805,16 @@ function slidePrev() { slideTo(slideIdx - 1); }
       {title:'Center of Gravity Shift', sub:'AIRFRAME-01', body:'During testing, the aircraft behavior was strongly tied to mass placement. Battery position and internal routing were treated as flight-critical design variables because small CG shifts changed stability quickly.'},
       {title:'Wiring as Structure', sub:'AIRFRAME-01', body:'The wiring was not just an electrical task. Routing affected access, balance, repairability, and how cleanly the airframe could close, so the layout became part of the mechanical design.'}
     ],
+    turret:[
+      {title:'Target Isolation', sub:'LASER TRACKING TURRET', body:'HSV filtering was chosen over RGB because it separates color from brightness, making detection stable under changing lighting conditions. Tuning the hue and saturation range was the difference between reliable tracking and constant false positives.'},
+      {title:'Jitter Elimination', sub:'LASER TRACKING TURRET', body:'Raw centroid values caused the servos to oscillate continuously. A dead-zone threshold combined with weighted smoothing gave the turret stable aim without sacrificing response speed to fast-moving targets.'}
+    ],
     noise:[
       {title:'Threshold Tuning', sub:'ACOUSTIC MAPPING SYSTEM', body:'Raw sound values were too jumpy for a useful user experience. The system needed smoothing and state thresholds so it could report room conditions instead of noisy sensor numbers.'},
       {title:'Field Conditions', sub:'ACOUSTIC MAPPING SYSTEM', body:'Testing in actual study spaces changed the design assumptions. Background noise, crowd flow, and room layout mattered more than a clean bench test, so the classification logic had to be grounded in real conditions.'}
     ]
   };
-  const noteKeys = ['irrigation','airframe','noise'];
+  const noteKeys = ['irrigation','airframe','turret','noise'];
   document.querySelectorAll('.mission-featured').forEach((card, idx) => {
     const key = noteKeys[idx];
     const info = card.querySelector('.mission-info');
